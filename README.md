@@ -2,9 +2,7 @@
 
 ## About Project
 
-This project is a web application framework with expressive, elegant syntax. I use it to train myself and upgrade my coding skill with new framework, new technical.
-
-Below is a set of charts demonstrating the paths that i want to take and the technologies that i would want to adopt in order to become a full-stack development. 
+This project is a web application which use it to train myself and upgrade my coding skill with new framework, new technical. Below is a set of charts demonstrating the paths that i want to take and the technologies that i would want to adopt in order to become a full-stack development. 
 
 ***
 
@@ -42,17 +40,17 @@ Below is a set of charts demonstrating the paths that i want to take and the tec
 ###### Deeper
 
 - Responsive Web
-- [Bootstrap] (https://getbootstrap.com/docs/4.0/getting-started/introduction/)
-- [Sass] (http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
-- [CSS3] (https://www.w3schools.com/css/css3_intro.asp)
-- [HTML5] (https://www.w3schools.com/html/html5_intro.asp)
+- [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
+- [Sass](http://sass-lang.com/documentation/file.SASS_REFERENCE.html)
+- [CSS3](https://www.w3schools.com/css/css3_intro.asp)
+- [HTML5](https://www.w3schools.com/html/html5_intro.asp)
 
 - ES6
 - NPM Script
 - Gulp
 - Yarn
 - Npm
-- [Vue.js 2.0] (https://vuejs.org/v2/guide/)
+- [Vue.js 2.0](https://vuejs.org/v2/guide/)
 
 #### Back-end
 
