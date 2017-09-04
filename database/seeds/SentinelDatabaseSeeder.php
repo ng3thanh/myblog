@@ -15,11 +15,13 @@ class SentinelDatabaseSeeder extends Seeder
         DB::table('users')->truncate();
 
         $admin = Sentinel::getUserRepository()->create(array(
+            'username' => 'admin',
             'email'    => 'admin@admin.com',
             'password' => 'password'
         ));
 
         $user = Sentinel::getUserRepository()->create(array(
+            'username' => 'user',
             'email'    => 'user@user.com',
             'password' => 'password'
         ));
