@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Cartalyst\Sentinel\Users\IlluminateUserRepository;
+use Centaur\AuthManager;
+use Centaur\Mail\CentaurWelcomeEmail;
+use Illuminate\Http\Request;
 use Mail;
 use Sentinel;
-use App\Http\Requests;
-use Centaur\AuthManager;
-use Illuminate\Http\Request;
-use Centaur\Mail\CentaurWelcomeEmail;
-use Cartalyst\Sentinel\Users\IlluminateUserRepository;
 
 class UserController extends Controller
 {

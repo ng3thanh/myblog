@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Sentinel;
-use App\Http\Requests;
 use Illuminate\Http\Request;
-use Cartalyst\Sentinel\Users\IlluminateUserRepository;
+use Sentinel;
 
 class RoleController extends Controller
 {
