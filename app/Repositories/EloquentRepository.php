@@ -46,8 +46,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Get one
      * 
-     * @param
-     *            $id
+     * @param $id
      * @return mixed
      */
     public function find($id)
@@ -70,8 +69,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Update
      * 
-     * @param
-     *            $id
+     * @param $id
      * @param array $attributes            
      * @return bool|mixed
      */
@@ -88,8 +86,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Delete
      *
-     * @param
-     *            $id
+     * @param $id
      * @return bool
      */
     public function delete($id)
