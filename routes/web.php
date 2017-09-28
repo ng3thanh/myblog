@@ -10,10 +10,8 @@
  * | contains the "web" middleware group. Now create something great!
  * |
  */
-Route::middleware('web')->domain('admin.' . env('APP_DOMAIN'))->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+Route::middleware('web')->domain('admin.' . env('APP_DOMAIN'))->namespace('Admin')->group(function () {
+    Route::get('/', 'DashboardController@index');
     
     Route::prefix('config')->group(function () {
         Route::resource('config', 'ConfigController');
