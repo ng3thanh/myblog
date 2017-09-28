@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Coin;
 
 class DashboardController extends Controller
 {
@@ -14,7 +15,6 @@ class DashboardController extends Controller
      */
     public function index()
     {
-//         return view('admin.layout');
         return view('admin.dashboard');
     }
 
