@@ -1,11 +1,11 @@
 <?php
 namespace App\Console\Commands;
 
-use App\Models\Coin;
-use App\Models\CoinList;
-use Exception;
+use App\Models\Coins;
+use App\Models\CoinsExchange;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
+use Exception;
 
 class GetCoinData extends Command
 {
@@ -46,9 +46,9 @@ class GetCoinData extends Command
             $dataCoins = json_decode($listCoins, true);
             if ($dataCoins['success'] === true) {
                 foreach ($dataCoins['result'] as $key => $val) {
-                    $checkExists = CoinList::where('market_name', $val['MarketName'])->first();
+                    $checkExists = Coins::where('market_name', $val['MarketName'])->first();
                     if (! $checkExists) {
-                        $coin = new CoinList();
+                        $coin = new Coins();
                         $coin->market_currency = $val['MarketCurrency'];
                         $coin->base_currency = $val['BaseCurrency'];
                         $coin->market_currency_long = $val['MarketCurrencyLong'];
@@ -66,9 +66,9 @@ class GetCoinData extends Command
             $data = json_decode($summaries, true);
             if ($data['success'] === true) {
                 foreach ($data['result'] as $key => $val) {
-                    $checkCoin = CoinList::where('market_name', $val['MarketName'])->first();
+                    $checkCoin = CoinsExchange::where('market_name', $val['MarketName'])->first();
                     if ($checkCoin) {
-                        $coin = new Coin();
+                        $coin = new CoinsExchange();
                         $coin->coin_id = $checkCoin->id;
                         $coin->volume = $val['Volume'];
                         $coin->base_volume = $val['BaseVolume'];
@@ -82,7 +82,7 @@ class GetCoinData extends Command
                 }
             }
         } catch (Exception $e) {
-            echo "Error: ". $e->getMessage();
+            echo "Error: " . $e->getMessage();
         }
     }
 }

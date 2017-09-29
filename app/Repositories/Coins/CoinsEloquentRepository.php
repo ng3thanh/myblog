@@ -1,10 +1,10 @@
 <?php
-namespace App\Repositories\Coin;
+namespace App\Repositories\Coins;
 
+use App\Models\Coins;
 use App\Repositories\EloquentRepository;
-use App\Models\CoinList;
 
-class CoinEloquentRepository extends EloquentRepository implements CoinRepositoryInterface
+class CoinsEloquentRepository extends EloquentRepository implements CoinsRepositoryInterface
 {
 
     /**
@@ -14,11 +14,11 @@ class CoinEloquentRepository extends EloquentRepository implements CoinRepositor
      */
     public function getModel()
     {
-        return CoinList::class;
+        return Coins::class;
     }
 
     /**
-     * Get all coin
+     * Get all coins
      *
      * @return mixed
      */
@@ -30,16 +30,14 @@ class CoinEloquentRepository extends EloquentRepository implements CoinRepositor
     }
 
     /**
-     * Get post only published
+     * Get coin only actived
      *
      * @param $id 
      * @return mixed
      */
     public function findOnlyActived($id)
     {
-        $result = $this->_model->where('id', $id)
-            ->where('is_active', 1)
-            ->first();
+        $result = $this->_model->where('id', $id)->where('is_active', 1)->first();
         
         return $result;
     }

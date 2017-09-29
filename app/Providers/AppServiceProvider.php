@@ -3,7 +3,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use App\Repositories\Coin\CoinRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,8 +25,10 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(
-            \App\Repositories\Coin\CoinRepositoryInterface::class,
-            \App\Repositories\Coin\CoinEloquentRepository::class
+            \App\Repositories\Coins\CoinsRepositoryInterface::class,
+            \App\Repositories\Coins\CoinsEloquentRepository::class,
+            \App\Repositories\CoinsExchange\CoinsExchangeRepositoryInterface::class,
+            \App\Repositories\CoinsExchange\CoinsExchangeEloquentRepository::class
         );
     }
 }

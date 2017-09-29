@@ -4,7 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class CoinList extends Model
+class Coins extends Model
 {
     use Notifiable;
 
@@ -13,7 +13,7 @@ class CoinList extends Model
      *
      * @var string
      */
-    protected $table = 'coin_lists';
+    protected $table = 'coins';
 
     /**
      * The attributes that are mass assignable.

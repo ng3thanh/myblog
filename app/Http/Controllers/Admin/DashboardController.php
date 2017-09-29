@@ -2,19 +2,21 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Coins\CoinsEloquentRepository;
 use Illuminate\Http\Request;
-use App\Repositories\Coin\CoinRepositoryInterface;
+use App\Repositories\CoinsExchange\CoinsExchangeEloquentRepository;
 
 class DashboardController extends Controller
 {
 
     protected $coinRepository;
-    
-    public function __construct(CoinRepositoryInterface $coinRepository)
+
+    public function __construct(CoinsEloquentRepository $coinRepository, CoinsExchangeEloquentRepository $coinsExchangeRepository)
     {
         $this->coinRepository = $coinRepository;
+        $this->coinsExchangeRepository = $coinsExchangeRepository;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -23,6 +25,8 @@ class DashboardController extends Controller
     public function index()
     {
         $countCoin = $this->coinRepository->getAll()->count();
+        $a = $this->coinsExchangeRepository->getLowestChangeRate();
+        dd($a);
         return view('admin.dashboard')->with('coins', $countCoin);
     }
 
@@ -39,7 +43,7 @@ class DashboardController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request            
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -50,7 +54,7 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id            
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -61,7 +65,7 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id            
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -72,8 +76,8 @@ class DashboardController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request            
-     * @param int $id            
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -84,7 +88,7 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id            
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

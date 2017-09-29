@@ -1,16 +1,18 @@
 <?php
-namespace App\Repositories\Coin;
+namespace App\Repositories\Coins;
 
-interface CoinRepositoryInterface
+interface CoinsRepositoryInterface
 {
-        /**
-     * Get all posts only published
+    /**
+     * Get all coins only actived
+     * 
      * @return mixed
      */
     public function getAllCoinActived();
 
     /**
-     * Get post only published
+     * Get coin only actived
+     * 
      * @return mixed
      */
     public function findOnlyActived($id);
