@@ -3,12 +3,14 @@ namespace App\Repositories\Coins;
 
 use App\Models\Coins;
 use App\Repositories\EloquentRepository;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class CoinsEloquentRepository extends EloquentRepository implements CoinsRepositoryInterface
 {
 
     /**
-     * get model
+     * Get model
      *
      * @return string
      */
@@ -32,7 +34,8 @@ class CoinsEloquentRepository extends EloquentRepository implements CoinsReposit
     /**
      * Get coin only actived
      *
-     * @param $id 
+     * @param
+     *            $id
      * @return mixed
      */
     public function findOnlyActived($id)

@@ -1,6 +1,8 @@
 <?php
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\DB;
+
 abstract class EloquentRepository implements RepositoryInterface
 {
 
@@ -20,7 +22,7 @@ abstract class EloquentRepository implements RepositoryInterface
 
     /**
      * get model
-     * 
+     *
      * @return string
      */
     abstract public function getModel();
@@ -35,7 +37,7 @@ abstract class EloquentRepository implements RepositoryInterface
 
     /**
      * Get All
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getAll()
@@ -45,8 +47,9 @@ abstract class EloquentRepository implements RepositoryInterface
 
     /**
      * Get one
-     * 
-     * @param $id
+     *
+     * @param
+     *            $id
      * @return mixed
      */
     public function find($id)
@@ -57,36 +60,70 @@ abstract class EloquentRepository implements RepositoryInterface
 
     /**
      * Create
-     * 
+     *
      * @param array $attributes            
      * @return mixed
      */
     public function create(array $attributes)
     {
-        return $this->_model->create($attributes);
+        try {
+            DB::beginTransaction();
+            
+            $new = new $this->_model;
+
+            foreach ($attributes as $key => $value) {
+                $new->$key = $attributes[$key];
+            }
+
+            $new->save();
+            
+            DB::commit();
+            
+            return $new;
+        } catch (Exception $e) {
+            DB::rollBack();
+            return false;
+        }
     }
 
     /**
      * Update
-     * 
-     * @param $id
+     *
+     * @param
+     *            $id
      * @param array $attributes            
      * @return bool|mixed
      */
     public function update($id, array $attributes)
     {
+
         $result = $this->find($id);
         if ($result) {
-            $result->update($attributes);
-            return $result;
+            try {
+                DB::beginTransaction();
+                
+                $result->update($attributes);
+                
+                DB::commit();
+                
+                return $result;
+                
+            } catch (Exception $e) {
+                DB::rollBack();
+                
+                return false;
+            }
         }
+        
         return false;
+        
     }
 
     /**
      * Delete
      *
-     * @param $id
+     * @param
+     *            $id
      * @return bool
      */
     public function delete($id)

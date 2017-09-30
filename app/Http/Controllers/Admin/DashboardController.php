@@ -25,8 +25,8 @@ class DashboardController extends Controller
     public function index()
     {
         $countCoin = $this->coinRepository->getAll()->count();
-        $a = $this->coinsExchangeRepository->getLowestChangeRate();
-        dd($a);
+        $a = $this->coinsExchangeRepository->getLowestChangeRateCoin();
+
         return view('admin.dashboard')->with('coins', $countCoin);
     }
 

@@ -6,6 +6,8 @@ use App\Models\CoinsExchange;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 use Exception;
+use App\Repositories\Coins\CoinsEloquentRepository;
+use App\Repositories\CoinsExchange\CoinsExchangeEloquentRepository;
 
 class GetCoinData extends Command
 {
@@ -29,9 +31,11 @@ class GetCoinData extends Command
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(CoinsEloquentRepository $coinRepository, CoinsExchangeEloquentRepository $coinExchangeRepository)
     {
         parent::__construct();
+        $this->coinRepository = $coinRepository;
+        $this->coinExchangeRepository = $coinExchangeRepository;
     }
 
     /**
@@ -48,16 +52,18 @@ class GetCoinData extends Command
                 foreach ($dataCoins['result'] as $key => $val) {
                     $checkExists = Coins::where('market_name', $val['MarketName'])->first();
                     if (! $checkExists) {
-                        $coin = new Coins();
-                        $coin->market_currency = $val['MarketCurrency'];
-                        $coin->base_currency = $val['BaseCurrency'];
-                        $coin->market_currency_long = $val['MarketCurrencyLong'];
-                        $coin->base_currency_long = $val['BaseCurrencyLong'];
-                        $coin->min_trade_size = $val['MinTradeSize'];
-                        $coin->market_name = $val['MarketName'];
-                        $coin->is_active = $val['IsActive'];
-                        $coin->created_time = $val['Created'];
-                        $coin->save();
+                        $attributes = [
+                            'market_currency'       => $val['MarketCurrency'],
+                            'base_currency'         => $val['BaseCurrency'],
+                            'market_currency_long'  => $val['MarketCurrencyLong'],
+                            'base_currency_long'    => $val['BaseCurrencyLong'],
+                            'min_trade_size'        => $val['MinTradeSize'],
+                            'market_name'           => $val['MarketName'],
+                            'is_active'             => $val['IsActive'],
+                            'created_time'          => $val['Created'],
+                        ];
+
+                        $this->coinRepository->create($attributes);
                     }
                 }
             }
@@ -66,18 +72,20 @@ class GetCoinData extends Command
             $data = json_decode($summaries, true);
             if ($data['success'] === true) {
                 foreach ($data['result'] as $key => $val) {
-                    $checkCoin = CoinsExchange::where('market_name', $val['MarketName'])->first();
+                    $checkCoin = Coins::where('market_name', $val['MarketName'])->first();
                     if ($checkCoin) {
-                        $coin = new CoinsExchange();
-                        $coin->coin_id = $checkCoin->id;
-                        $coin->volume = $val['Volume'];
-                        $coin->base_volume = $val['BaseVolume'];
-                        $coin->highest_price = $val['High'];
-                        $coin->lowest_price = $val['Low'];
-                        $coin->open_buy_orders = $val['OpenBuyOrders'];
-                        $coin->open_sell_orders = $val['OpenSellOrders'];
-                        $coin->prev_day = $val['PrevDay'];
-                        $coin->save();
+                        $attributes = [
+                            'coin_id'           => $checkCoin->id,
+                            'volume'            => $val['Volume'],
+                            'base_volume'       => $val['BaseVolume'],
+                            'highest_price'     => $val['High'],
+                            'lowest_price'      => $val['Low'],
+                            'open_buy_orders'   => $val['OpenBuyOrders'],
+                            'open_sell_orders'  => $val['OpenSellOrders'],
+                            'prev_day'          => $val['PrevDay']
+                        ];
+                        
+                        $this->coinExchangeRepository->create($attributes);
                     }
                 }
             }

@@ -8,6 +8,9 @@ interface CoinsExchangeRepositoryInterface
      *
      * @return mixed
      */
-    public function getLowestChangeRate();
+    public function getLowestChangeRateCoin();
+    
+    public function getHighestChangeRateCoin();
+    
 
 }
