@@ -24,10 +24,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $countCoin = $this->coinRepository->getAll()->count();
-        $a = $this->coinsExchangeRepository->getLowestChangeRateCoin();
+        $totalCoin = $this->coinRepository->getAll()->count();
+        $lowestCoin = $this->coinsExchangeRepository->getLowestChangeRateCoin();
+        dd($lowestCoin);
+        $highestCoin = $this->coinsExchangeRepository->getHighestChangeRateCoin();
 
-        return view('admin.dashboard')->with('coins', $countCoin);
+        return view('admin.dashboard')->with('coins', $totalCoin);
     }
 
     /**

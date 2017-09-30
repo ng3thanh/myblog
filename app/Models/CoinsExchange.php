@@ -30,4 +30,12 @@ class CoinsExchange extends Model
         'open_sell_orders',
         'prev_day'
     ];
+    
+    /**
+     * Get the coin of one exchange.
+     */
+    public function coinOfExchange()
+    {
+        return $this->belongsTo('App\Models\Coins', 'coin_id');
+    }
 }

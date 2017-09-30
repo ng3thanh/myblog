@@ -30,4 +30,12 @@ class Coins extends Model
         'is_active',
         'created_time'
     ];
+    
+    /**
+     * Get the exchange of one coin.
+     */
+    public function exchangeOfCoin()
+    {
+        return $this->hasMany('App\Models\CoinsExchange', 'coin_id');
+    }
 }

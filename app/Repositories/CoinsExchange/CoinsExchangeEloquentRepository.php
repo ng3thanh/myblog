@@ -1,9 +1,9 @@
 <?php
 namespace App\Repositories\CoinsExchange;
 
+use App\Helpers\Date\DateHelper;
 use App\Models\CoinsExchange;
 use App\Repositories\EloquentRepository;
-use App\Helpers\Date\DateHelper;
 
 class CoinsExchangeEloquentRepository extends EloquentRepository implements CoinsExchangeRepositoryInterface
 {
@@ -18,7 +18,6 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
         return CoinsExchange::class;
     }
 
-    
     /**
      * Get 5 coins have the lowest rate of change in 7 days
      *
@@ -27,9 +26,10 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
     public function getLowestChangeRateCoin()
     {
         $dayAgo = DateHelper::getDateInManyDaysAgo('Y-m-d 00:00:00', 7);
-
+        
         $result = $this->_model->where('created_at', '>', $dayAgo)->get();
         
+        dd($result);
         return $result;
     }
 
@@ -38,9 +38,6 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
      *
      * @return mixed
      */
-    
     public function getHighestChangeRateCoin()
-    {
-        
-    }
+    {}
 }
