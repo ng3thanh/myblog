@@ -13,7 +13,7 @@
 			<!-- small box -->
 			<div class="small-box bg-aqua">
 				<div class="inner">
-					<h3>{{ $coins }}</h3>
+					<h3>{{ $totalCoins }}</h3>
 					@if(true) <p>Coins</p> @else <p>Down</p> @endif
 				</div>
 				<div class="icon">

@@ -19,18 +19,47 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
     }
 
     /**
-     * Get 5 coins have the lowest rate of change in 7 days
+     * Group coin ecchange in 7 days
      *
      * @return mixed
      */
+    protected function groupCoinExchangeQuery()
+    {
+        $dayAgo = DateHelper::getDateInManyDaysAgo('Y-m-d 00:00:00', CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS);
+        
+        $result = $this->_model->where('created_at', '>', $dayAgo)->selectRaw('ANY_VALUE(coin_id) as coin_id, 
+                                    ANY_VALUE((highest_price - lowest_price)*100/lowest_price) as change_rate, 
+                                    ANY_VALUE(highest_price) as highest_price,
+                                    ANY_VALUE(lowest_price) as lowest_price,
+                                    ANY_VALUE(prev_day) as prev_day, 
+                                    ANY_VALUE(created_at) as created_at');
+        return $result;
+    }
+
+    /**
+     * Get 5 coins have the lowest rate of change in 7 days
+     *
+     * @return array
+     */
     public function getLowestChangeRateCoin()
     {
-        $dayAgo = DateHelper::getDateInManyDaysAgo('Y-m-d 00:00:00', 7);
+        $query = $this->groupCoinExchangeQuery();
+        $results = $query->having('change_rate', '<', CoinsExchange::CHANGE_RATE_LOW)->get()->toArray();
         
-        $result = $this->_model->where('created_at', '>', $dayAgo)->get();
+        $data = array();
         
-        dd($result);
-        return $result;
+        foreach ($results as $key => $item) {
+            $data[$item['coin_id']][$key] = $item;
+        }
+        
+        // DEMO (Get 7-4) NORMAL = 7 - 7
+        foreach ($data as $key => $value) {
+            if (count($value) < (CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS - 4)) {
+                unset($data[$key]);
+            }
+        }
+        
+        return $data;
     }
 
     /**
