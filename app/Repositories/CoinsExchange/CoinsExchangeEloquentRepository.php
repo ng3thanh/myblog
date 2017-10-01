@@ -73,5 +73,23 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
      * @return mixed
      */
     public function getHighestChangeRateCoin()
-    {}
+    {
+        $query = $this->groupCoinExchangeQuery();
+        $results = $query->having('change_rate', '>', CoinsExchange::CHANGE_RATE_MEDIUM)->get()->toArray();
+        
+        $data = array();
+        
+        foreach ($results as $key => $item) {
+            $data[$item['coin_name']][$key] = $item;
+        }
+        
+        // DEMO (Get 7-4) NORMAL = 7 - 7
+        foreach ($data as $key => $value) {
+            if (count($value) < (CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS - 3)) {
+                unset($data[$key]);
+            }
+        }
+        
+        return $data;
+    }
 }

@@ -18,11 +18,9 @@
 					@endif
 				</div>
 				<div class="icon">
-					<i
-						class="ion @if(true) ion-happy-outline @else ion-sad-outline @endif"></i>
+					<i class="ion @if(true) ion-happy-outline @else ion-sad-outline @endif"></i>
 				</div>
-				<a href="#" class="small-box-footer">More info <i
-					class="fa fa-arrow-circle-right"></i></a>
+				<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<!-- ./col -->
@@ -39,8 +37,7 @@
 				<div class="icon">
 					<i class="ion ion-stats-bars"></i>
 				</div>
-				<a href="#" class="small-box-footer">More info <i
-					class="fa fa-arrow-circle-right"></i></a>
+				<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<!-- ./col -->
@@ -55,8 +52,7 @@
 				<div class="icon">
 					<i class="ion ion-person-add"></i>
 				</div>
-				<a href="#" class="small-box-footer">More info <i
-					class="fa fa-arrow-circle-right"></i></a>
+				<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<!-- ./col -->
@@ -71,8 +67,7 @@
 				<div class="icon">
 					<i class="ion ion-pie-graph"></i>
 				</div>
-				<a href="#" class="small-box-footer">More info <i
-					class="fa fa-arrow-circle-right"></i></a>
+				<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<!-- ./col -->
@@ -82,34 +77,49 @@
 	<div class="row">
 		<!-- Left col -->
 		<section class="col-lg-7 connectedSortable">
+		
 			<!-- Custom tabs (Charts with tabs)-->
 			<div class="nav-tabs-custom">
 
 				<!-- Tabs within a box -->
 				<ul class="nav nav-tabs pull-right">
 					@foreach($lowestCoins as $key => $coin)
-					<li
-						class="@if(array_search(head($lowestCoins), $lowestCoins) == $key) active @endif">
-						<a href="#revenue-chart-{{ $key }}" data-toggle="tab">{{ $key }}</a>
-					</li> @endforeach
-					<li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-					<li class="pull-left header"><i class="fa fa-bitcoin"></i> Lowest
-						Coin</li>
+					<li class="@if(array_search(head($lowestCoins), $lowestCoins) == $key) active @endif">
+						<a href="#lowest-chart-{{ $key }}" data-toggle="tab">{{ $key }}</a>
+					</li>
+					@endforeach
+					<li class="pull-left header"><i class="fa fa-bitcoin"></i> Lowest Coin</li>
 				</ul>
 				<div class="tab-content no-padding">
 					<!-- Morris chart - Sales -->
 					@foreach($lowestCoins as $key => $coin)
-					<div
-						class="chart tab-pane @if(array_search(head($lowestCoins), $lowestCoins) == $key) active @endif"
-						id="revenue-chart-{{ $key }}"
-						style="position: relative; height: 300px;"></div>
+					<div class="chart tab-pane @if(array_search(head($lowestCoins), $lowestCoins) == $key) active @endif" id="lowest-chart-{{ $key }}" style="position: relative; height: 300px;"></div>
 					@endforeach
-					<div class="chart tab-pane" id="sales-chart"
-						style="position: relative; height: 300px;"></div>
 				</div>
 			</div>
 			<!-- /.nav-tabs-custom -->
 
+			<!-- Custom tabs (Charts with tabs)-->
+			<div class="nav-tabs-custom">
+
+				<!-- Tabs within a box -->
+				<ul class="nav nav-tabs pull-right">
+					@foreach($highestCoins as $key => $coin)
+					<li class="@if(array_search(head($highestCoins), $highestCoins) == $key) active @endif">
+						<a href="#highest-chart-{{ $key }}" data-toggle="tab">{{ $key }}</a>
+					</li>
+					@endforeach
+					<li class="pull-left header"><i class="fa fa-bitcoin"></i> Highest Coin</li>
+				</ul>
+				<div class="tab-content no-padding">
+					<!-- Morris chart - Sales -->
+					@foreach($highestCoins as $key => $coin)
+					<div class="chart tab-pane @if(array_search(head($highestCoins), $highestCoins) == $key) active @endif" id="highest-chart-{{ $key }}" style="position: relative; height: 300px;"></div>
+					@endforeach
+				</div>
+			</div>
+			<!-- /.nav-tabs-custom -->
+			
 			<!-- Chat box -->
 			<div class="box box-success">
 				<div class="box-header">
@@ -521,8 +531,8 @@
 @endsection @section('script')
 <script type="text/javascript">
     @foreach($lowestCoins as $key => $coin)
-    	var coin{{ $key }} = new Morris.Area({
-          element   : 'revenue-chart-{{ $key }}',
+    	var lowCoin{{ $key }} = new Morris.Area({
+          element   : 'lowest-chart-{{ $key }}',
           resize    : true,
           data      : [
     		@foreach($coin as $k => $v)
@@ -537,13 +547,36 @@
         });
     @endforeach
 
+    @foreach($highestCoins as $key => $coin)
+    	var highCoin{{ $key }} = new Morris.Area({
+          element   : 'highest-chart-{{ $key }}',
+          resize    : true,
+          data      : [
+    		@foreach($coin as $k => $v)
+          	{ time: '{{ $v['created_at'] }}', lowest: '{{ $v['lowest_price'] }}', highest: '{{ $v['highest_price'] }}' },
+    		@endforeach
+          ],
+          xkey      : 'time',
+          ykeys     : ['lowest', 'highest'],
+          labels    : ['Lowest', 'Highest'],
+          lineColors: ['#a0d0e0', '#3c8dbc'],
+          hideHover : 'auto'
+        });
+	@endforeach
+	
     $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 		var target = $(e.target).attr("href") // activated tab
 
 		switch (target) {
 			@foreach($lowestCoins as $key => $coin)
-            case "#revenue-chart-{{ $key }}":
-        		coin{{ $key }}.redraw();
+            case "#lowest-chart-{{ $key }}":
+        		lowCoin{{ $key }}.redraw();
+              	$(window).trigger('resize');
+              	break;
+          	@endforeach
+          	@foreach($highestCoins as $key => $coin)
+            case "#highest-chart-{{ $key }}":
+        		highCoin{{ $key }}.redraw();
               	$(window).trigger('resize');
               	break;
           	@endforeach
