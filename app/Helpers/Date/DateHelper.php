@@ -2,6 +2,8 @@
 
 namespace App\Helpers\Date;
 
+use Carbon\Carbon;
+
 class DateHelper{
 
     /**
@@ -12,6 +14,9 @@ class DateHelper{
      * @return string
      */
     public static function getDateInManyDaysAgo($format, $days) {
-        return date($format, strtotime('-'.$days.' days', time()));
+        
+        $range = Carbon::now()->subDays($days);
+        
+        return date($format, strtotime($range));
     }
 }

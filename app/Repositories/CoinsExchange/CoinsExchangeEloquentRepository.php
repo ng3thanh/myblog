@@ -26,13 +26,17 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
     protected function groupCoinExchangeQuery()
     {
         $dayAgo = DateHelper::getDateInManyDaysAgo('Y-m-d 00:00:00', CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS);
-        
-        $result = $this->_model->where('created_at', '>', $dayAgo)->selectRaw('ANY_VALUE(coin_id) as coin_id, 
-                                    ANY_VALUE((highest_price - lowest_price)*100/lowest_price) as change_rate, 
-                                    ANY_VALUE(highest_price) as highest_price,
-                                    ANY_VALUE(lowest_price) as lowest_price,
-                                    ANY_VALUE(prev_day) as prev_day, 
-                                    ANY_VALUE(created_at) as created_at');
+
+        $result = $this->_model->join('coins', 'coins.id', '=', 'coins_exchange.coin_id')
+            ->where('coins.base_currency', '=', 'BTC')
+            ->where('coins_exchange.created_at', '>', $dayAgo)
+            ->selectRaw('ANY_VALUE(market_currency) as coin_name,
+                         ANY_VALUE(coin_id) as coin_id, 
+                         ANY_VALUE((highest_price - lowest_price)*100/lowest_price) as change_rate, 
+                         ANY_VALUE(highest_price) as highest_price,
+                         ANY_VALUE(lowest_price) as lowest_price,
+                         ANY_VALUE(prev_day) as prev_day, 
+                         ANY_VALUE(coins_exchange.created_at) as created_at');
         return $result;
     }
 
@@ -49,7 +53,7 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
         $data = array();
         
         foreach ($results as $key => $item) {
-            $data[$item['coin_id']][$key] = $item;
+            $data[$item['coin_name']][$key] = $item;
         }
         
         // DEMO (Get 7-4) NORMAL = 7 - 7
