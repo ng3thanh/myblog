@@ -27,5 +27,6 @@
     	</div>
     	
     	@include('admin.assets.js')
+    	@yield('script')
     </body>
 </html>
