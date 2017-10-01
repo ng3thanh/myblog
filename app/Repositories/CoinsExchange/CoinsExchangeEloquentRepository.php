@@ -29,6 +29,7 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
 
         $result = $this->_model->join('coins', 'coins.id', '=', 'coins_exchange.coin_id')
             ->where('coins.base_currency', '=', 'BTC')
+            ->where('coins.market_currency', '!=', 'ETH')
             ->where('coins_exchange.created_at', '>', $dayAgo)
             ->selectRaw('ANY_VALUE(market_currency) as coin_name,
                          ANY_VALUE(coin_id) as coin_id, 
@@ -58,7 +59,7 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
         
         // DEMO (Get 7-4) NORMAL = 7 - 7
         foreach ($data as $key => $value) {
-            if (count($value) < (CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS - 4)) {
+            if (count($value) < (CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS - 3)) {
                 unset($data[$key]);
             }
         }

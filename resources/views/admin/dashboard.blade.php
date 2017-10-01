@@ -517,6 +517,7 @@
 
 </section>
 <!-- /.content -->
+
 @endsection @section('script')
 <script type="text/javascript">
     @foreach($lowestCoins as $key => $coin)
