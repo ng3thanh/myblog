@@ -3,13 +3,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\Coins\CoinsEloquentRepository;
-use Illuminate\Http\Request;
 use App\Repositories\CoinsExchange\CoinsExchangeEloquentRepository;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
 
     protected $coinRepository;
+
+    protected $coinsExchangeRepository;
 
     public function __construct(CoinsEloquentRepository $coinRepository, CoinsExchangeEloquentRepository $coinsExchangeRepository)
     {

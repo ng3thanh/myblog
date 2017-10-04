@@ -1,12 +1,24 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Coins\CoinsEloquentRepository;
+use App\Repositories\CoinsExchange\CoinsExchangeEloquentRepository;
+use Illuminate\Http\Request;
 
-class CoinController extends Controller
+class CoinNormalController extends Controller
 {
+
+    protected $coinRepository;
+
+    protected $coinsExchangeRepository;
+
+    public function __construct(CoinsEloquentRepository $coinRepository, CoinsExchangeEloquentRepository $coinsExchangeRepository)
+    {
+        $this->coinRepository = $coinRepository;
+        $this->coinsExchangeRepository = $coinsExchangeRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,8 @@ class CoinController extends Controller
      */
     public function index()
     {
-        //
+        $data = $this->coinsExchangeRepository->getCoinExchangeInLastTime();
+        return view('admin.coin.normal', ['data' => $data]);
     }
 
     /**
@@ -30,7 +43,7 @@ class CoinController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request            
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +54,7 @@ class CoinController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id            
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,7 +65,7 @@ class CoinController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id            
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -63,8 +76,8 @@ class CoinController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request            
+     * @param int $id            
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -75,7 +88,7 @@ class CoinController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id            
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

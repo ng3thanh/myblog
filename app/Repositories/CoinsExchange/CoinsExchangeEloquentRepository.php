@@ -59,7 +59,7 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
         
         // DEMO (Get 7-4) NORMAL = 7 - 7
         foreach ($data as $key => $value) {
-            if (count($value) < (CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS - 3)) {
+            if (count($value) < CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS) {
                 unset($data[$key]);
             }
         }
@@ -85,11 +85,29 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
         
         // DEMO (Get 7-4) NORMAL = 7 - 7
         foreach ($data as $key => $value) {
-            if (count($value) < (CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS - 3)) {
+            if (count($value) < CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS) {
                 unset($data[$key]);
             }
         }
         
         return $data;
+    }
+    
+    public function getCoinExchangeInLastTime()
+    {
+        $oneDay = DateHelper::getDateInManyDaysAgo('Y-m-d H:i:s', 1);
+
+        $result = $this->_model->join('coins', 'coins.id', '=', 'coins_exchange.coin_id')
+            ->where('coins.base_currency', '=', 'BTC')
+            ->where('coins.market_currency', '!=', 'ETH')
+            ->where('coins_exchange.created_at', '>', $oneDay)
+            ->selectRaw('ANY_VALUE(market_currency) as coin_name,
+                         ANY_VALUE(coin_id) as coin_id,
+                         ANY_VALUE((highest_price - lowest_price)*100/lowest_price) as change_rate,
+                         ANY_VALUE(base_volume) as base_volume,
+                         ANY_VALUE(open_buy_orders) as open_buy_orders,
+                         ANY_VALUE(open_sell_orders) as open_sell_orders')
+            ->get();
+        return $result;
     }
 }

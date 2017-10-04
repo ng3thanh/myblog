@@ -7,7 +7,7 @@
 		<!-- Sidebar user panel -->
 		<div class="user-panel">
 			<div class="pull-left image">
-				<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+				<img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
 				<p>Alexander Pierce</p>
@@ -35,7 +35,7 @@
 			<li class="header">MAIN NAVIGATION</li>
 			
 			<li class="active treeview">
-    			<a href="#"> 
+    			<a href="{{ URL::route('main') }}"> 
     				<i class="fa fa-dashboard"></i>
     				<span> Dashboard</span>
     			</a>
@@ -121,8 +121,8 @@
 				</a>
 				<ul class="treeview-menu">
 					<li>
-						<a href="pages/charts/chartjs.html">
-							<i class="fa fa-circle-o"></i>ChartJS
+						<a href="{{ URL::route('ncoin.index') }}">
+							<i class="fa fa-circle-o"></i>Normal Tracking
 						</a>
 					</li>
 				</ul>

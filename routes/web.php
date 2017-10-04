@@ -22,7 +22,7 @@ Route::middleware('web')->domain('admin.' . env('APP_DOMAIN'))->namespace('Admin
     });
     
     Route::prefix('coin')->group(function () {
-        Route::resource('coin', 'CoinController');
+        Route::resource('ncoin', 'CoinNormalController');
     });
     
     Route::prefix('static')->group(function () {
