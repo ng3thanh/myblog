@@ -8,6 +8,7 @@
 		<link rel="shortcut icon" href="{{ asset('image/favicon.ico') }}" type="image/x-icon">
 		<link rel="icon" href="{{ asset('image/favicon.ico') }}" type="image/x-icon">
 		@include('admin.assets.css')
+		@yield('css')
 	</head>
 
     <body class="hold-transition skin-blue sidebar-mini">

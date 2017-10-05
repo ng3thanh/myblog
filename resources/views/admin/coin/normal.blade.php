@@ -2,6 +2,10 @@
 
 @section('title', 'Bitcoin | Normal Tracking')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('dist/css/dataTables.bootstrap.min.css') }}">
+@endsection
+
 @section('content')
 
 <!-- Main content -->
@@ -63,11 +67,11 @@
   $(function () {
     $('#coin-tracking').DataTable({
       'paging'      : true,
-      'lengthChange': false,
-      'searching'   : false,
+      'lengthChange': true,
+      'searching'   : true,
       'ordering'    : true,
       'info'        : true,
-      'autoWidth'   : false
+      'autoWidth'   : true
     })
   })
 </script>
