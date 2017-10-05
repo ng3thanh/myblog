@@ -106,7 +106,10 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
                          ANY_VALUE((highest_price - lowest_price)*100/lowest_price) as change_rate,
                          ANY_VALUE(base_volume) as base_volume,
                          ANY_VALUE(open_buy_orders) as open_buy_orders,
-                         ANY_VALUE(open_sell_orders) as open_sell_orders')
+                         ANY_VALUE(open_sell_orders) as open_sell_orders,
+                         ANY_VALUE(prev_day) as prev_day,
+                         ANY_VALUE(highest_price) as highest_price,
+                         ANY_VALUE(lowest_price) as lowest_price')
             ->get();
         return $result;
     }
