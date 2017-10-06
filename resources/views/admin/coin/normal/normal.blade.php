@@ -31,7 +31,7 @@
 						<tbody>
 						@foreach($data as $key => $val)
 							<tr>
-								<td>{{ $val->coin_name }}</td>
+								<td><a href="{{ URL::route('ncoin.show', $val->coin_name) }}">{{ $val->coin_name }}</a></td>
 								<td>{{ $val->base_volume }}</td>
 								<td>{{ $val->change_rate }}</td>
 								<td>{{ $val->open_buy_orders }}</td>

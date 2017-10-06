@@ -26,6 +26,10 @@ class GetCoinData extends Command
      */
     protected $description = 'Get price of Altcoin in Bittrex market';
 
+    protected $coinRepository;
+    
+    protected $coinExchangeRepository;
+    
     /**
      * Create a new command instance.
      *

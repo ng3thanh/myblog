@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\Coins\CoinsEloquentRepository;
 use App\Repositories\CoinsExchange\CoinsExchangeEloquentRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class CoinNormalController extends Controller
 {
@@ -27,7 +28,9 @@ class CoinNormalController extends Controller
     public function index()
     {
         $data = $this->coinsExchangeRepository->getCoinExchangeInLastTime();
-        return view('admin.coin.normal', ['data' => $data]);
+        return view('admin.coin.normal.normal', [
+            'data' => $data
+        ]);
     }
 
     /**
@@ -57,9 +60,17 @@ class CoinNormalController extends Controller
      * @param int $id            
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($coinName)
     {
-        //
+        $realData = file_get_contents(Config::get('url.bittrex_api') . 'getticker?market=BTC-' . $coinName);
+        
+        $oldData = 123;
+        
+        return view('admin.coin.normal.detail', [
+            'coin' => $coinName,
+            'data' => $realData,
+            'oldData' => $oldData
+        ]);
     }
 
     /**
