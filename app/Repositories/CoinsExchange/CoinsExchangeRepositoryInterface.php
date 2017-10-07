@@ -17,5 +17,13 @@ interface CoinsExchangeRepositoryInterface
      */
     public function getHighestChangeRateCoin();
     
+    /**
+     * Get detail information of coin exchange in n days
+     * 
+     * @param string $coinName
+     * @param string $marketName
+     * @param int $days
+     */
+    public function getDetailCoinExchange($coinName, $marketName, $days);
 
 }

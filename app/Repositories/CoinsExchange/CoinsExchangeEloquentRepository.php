@@ -37,7 +37,9 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
                          ANY_VALUE(highest_price) as highest_price,
                          ANY_VALUE(lowest_price) as lowest_price,
                          ANY_VALUE(prev_day) as prev_day, 
-                         ANY_VALUE(coins_exchange.created_at) as created_at');
+                         ANY_VALUE(coins_exchange.created_at) as created_at')
+            ->orderBy('created_at');
+        
         return $result;
     }
 
@@ -112,5 +114,30 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
                          ANY_VALUE(lowest_price) as lowest_price')
             ->get();
         return $result;
+    }
+    
+    public function getDetailCoinExchange($coinName, $marketName, $days)
+    {
+        $dayAgo = DateHelper::getDateInManyDaysAgo('Y-m-d 00:00:00', $days);
+        
+        $result = $this->_model->join('coins', 'coins.id', '=', 'coins_exchange.coin_id')
+        ->where('coins.base_currency', '=', $marketName)
+        ->where('coins.market_currency', '=', $coinName)
+        ->where('coins_exchange.created_at', '>', $dayAgo)
+        ->selectRaw('ANY_VALUE(market_currency) as coin_name,
+                     ANY_VALUE(coin_id) as coin_id,
+                     ANY_VALUE((highest_price - lowest_price)*100/lowest_price) as change_rate,
+                     ANY_VALUE(base_volume) as base_volume,
+                     ANY_VALUE(open_buy_orders) as open_buy_orders,
+                     ANY_VALUE(open_sell_orders) as open_sell_orders,
+                     ANY_VALUE(prev_day) as prev_day,
+                     ANY_VALUE(highest_price) as highest_price,
+                     ANY_VALUE(lowest_price) as lowest_price,
+                     ANY_VALUE(coins_exchange.created_at) as created_at')
+         ->orderBy('coins_exchange.created_at')
+         ->get();
+                         
+         return $result;
+        
     }
 }

@@ -49,12 +49,10 @@
 					<h3 class="box-title">Line Chart</h3>
 
 					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool"
-							data-widget="collapse">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse">
 							<i class="fa fa-minus"></i>
 						</button>
-						<button type="button" class="btn btn-box-tool"
-							data-widget="remove">
+						<button type="button" class="btn btn-box-tool" data-widget="remove">
 							<i class="fa fa-times"></i>
 						</button>
 					</div>
@@ -164,6 +162,9 @@
 
 <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
 <script src="{{ asset('js/jquery.flot.categories.js') }}"></script>
+
+<!-- FLOT TIME PLUGIN - Used to set time in charts -->
+<script src="{{ asset('js/jquery.flot.time.js') }}"></script>
 
 <!-- Page script -->
 <script>
@@ -302,7 +303,9 @@
         show: true
       },
       xaxis : {
-        show: true
+        show: true,
+//         mode: "time",
+//         timeformat: "%y/%m"
       }
     })
     //Initialize tooltip on hover

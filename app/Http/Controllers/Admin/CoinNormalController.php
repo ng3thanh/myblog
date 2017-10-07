@@ -64,12 +64,22 @@ class CoinNormalController extends Controller
     {
         $realData = file_get_contents(Config::get('url.bittrex_api') . 'getticker?market=BTC-' . $coinName);
         
-        $oldData = 123;
+        $detailData = $this->coinsExchangeRepository->getDetailCoinExchange($coinName, 'BTC', 14);
         
+        $highest = [];
+        $lowest = [];
+        
+        foreach ($detailData as $key => $item) {
+            $highest[$key] = [0 => date('Y-m-d', strtotime($item->created_at)), 1 => $item->highest_price];
+            $lowest[$key] = [0 => date('Y-m-d', strtotime($item->created_at)), 1 => $item->lowest_price];
+        }
+
         return view('admin.coin.normal.detail', [
             'coin' => $coinName,
             'data' => $realData,
-            'oldData' => $oldData
+            'detailData' => $detailData,
+            'lowest' => json_encode($lowest),
+            'highest' => json_encode($highest)
         ]);
     }
 
