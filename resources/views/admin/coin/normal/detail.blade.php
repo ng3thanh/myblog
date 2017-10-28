@@ -20,10 +20,8 @@
 					<div class="box-tools pull-right">
 						Real time
 						<div class="btn-group" id="realtime" data-toggle="btn-toggle">
-							<button type="button" class="btn btn-default btn-xs active"
-								data-toggle="on">On</button>
-							<button type="button" class="btn btn-default btn-xs"
-								data-toggle="off">Off</button>
+							<button type="button" class="btn btn-default btn-xs active" data-toggle="on">On</button>
+							<button type="button" class="btn btn-default btn-xs" data-toggle="off">Off</button>
 						</div>
 					</div>
 				</div>
@@ -58,7 +56,10 @@
 					</div>
 				</div>
 				<div class="box-body">
-					<div id="line-chart" style="height: 300px;"></div>
+					<div id="line-chart" style="height: 300px;">
+						<input id="line-highest" hidden="hidden" value="{{ $highest }}">
+						<input id="line-lowest" hidden="hidden" value="{{ $lowest }}">
+					</div>
 				</div>
 				<!-- /.box-body-->
 			</div>
@@ -266,11 +267,14 @@
      */
     //LINE randomly generated data
 
-    var sin = [], cos = []
+    var sin = [], cos = [], highest = $("#line-highest").val();
+    
     for (var i = 0; i < 14; i += 0.5) {
       sin.push([i, Math.sin(i)])
       cos.push([i, Math.cos(i)])
     }
+    console.log(cos);
+    console.log(highest);
     var line_data1 = {
       data : sin,
       color: '#3c8dbc'

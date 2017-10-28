@@ -11,6 +11,7 @@
  * |
  */
 Route::middleware('web')->domain('admin.' . env('APP_DOMAIN'))->namespace('Admin')->group(function () {
+	
     Route::get('/', 'DashboardController@index')->name('main');
     
     Route::prefix('config')->group(function () {

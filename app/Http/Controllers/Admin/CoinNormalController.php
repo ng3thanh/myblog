@@ -74,6 +74,8 @@ class CoinNormalController extends Controller
             $lowest[$key] = [0 => date('Y-m-d', strtotime($item->created_at)), 1 => $item->lowest_price];
         }
 
+//         dd($highest);
+
         return view('admin.coin.normal.detail', [
             'coin' => $coinName,
             'data' => $realData,
