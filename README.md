@@ -96,6 +96,8 @@ This project is a web application which use it to train myself and upgrade my co
 
 ## Library used
 
+- [Laravel - Centaur](https://github.com/SRLabs/Centaur) : This package provides an opinionated implementation of Cartalyst Sentinel for Laravel.
+- [Laravel - Debugbar](https://github.com/barryvdh/laravel-debugbar) : This is a package to integrate PHP Debug Bar with Laravel 5. 
 
 
 

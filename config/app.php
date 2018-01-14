@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Ho_Chi_Minh',
 
     /*
     |--------------------------------------------------------------------------
@@ -124,6 +124,8 @@ return [
     'log' => env('APP_LOG', 'single'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    
+    'log_max_files' => 10,
 
     /*
     |--------------------------------------------------------------------------
@@ -176,7 +178,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        App\Providers\HelperServiceProvider::class,
+        
+        Centaur\CentaurServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+        
     ],
 
     /*
@@ -225,7 +231,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'DateHelper' => App\Helpers\Date\DateHelper::class,
     ],
 
 ];
