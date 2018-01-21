@@ -31,15 +31,15 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
             ->where('coins.base_currency', '=', 'BTC')
             ->where('coins.market_currency', '!=', 'ETH')
             ->where('coins_exchange.created_at', '>', $dayAgo)
-            ->selectRaw('ANY_VALUE(market_currency) as coin_name,
-                         ANY_VALUE(coin_id) as coin_id, 
-                         ANY_VALUE((highest_price - lowest_price)*100/lowest_price) as change_rate, 
-                         ANY_VALUE(highest_price) as highest_price,
-                         ANY_VALUE(lowest_price) as lowest_price,
-                         ANY_VALUE(prev_day) as prev_day, 
-                         ANY_VALUE(coins_exchange.created_at) as created_at')
+            ->selectRaw('market_currency as coin_name,
+                         coin_id as coin_id, 
+                         (highest_price - lowest_price)*100/lowest_price as change_rate, 
+                         highest_price as highest_price,
+                         lowest_price as lowest_price,
+                         prev_day as prev_day, 
+                         coins_exchange.created_at as created_at')
             ->orderBy('created_at');
-        
+
         return $result;
     }
 
@@ -84,8 +84,7 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
         foreach ($results as $key => $item) {
             $data[$item['coin_name']][$key] = $item;
         }
-        
-        // DEMO (Get 7-4) NORMAL = 7 - 7
+
         foreach ($data as $key => $value) {
             if (count($value) < CoinsExchange::SHOW_DATA_OF_NUMBER_DAYS) {
                 unset($data[$key]);
@@ -103,15 +102,15 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
             ->where('coins.base_currency', '=', 'BTC')
             ->where('coins.market_currency', '!=', 'ETH')
             ->where('coins_exchange.created_at', '>', $oneDay)
-            ->selectRaw('ANY_VALUE(market_currency) as coin_name,
-                         ANY_VALUE(coin_id) as coin_id,
-                         ANY_VALUE((highest_price - lowest_price)*100/lowest_price) as change_rate,
-                         ANY_VALUE(base_volume) as base_volume,
-                         ANY_VALUE(open_buy_orders) as open_buy_orders,
-                         ANY_VALUE(open_sell_orders) as open_sell_orders,
-                         ANY_VALUE(prev_day) as prev_day,
-                         ANY_VALUE(highest_price) as highest_price,
-                         ANY_VALUE(lowest_price) as lowest_price')
+            ->selectRaw('market_currency as coin_name,
+                         coin_id as coin_id,
+                         (highest_price - lowest_price)*100/lowest_price as change_rate,
+                         base_volume as base_volume,
+                         open_buy_orders as open_buy_orders,
+                         open_sell_orders as open_sell_orders,
+                         prev_day as prev_day,
+                         highest_price as highest_price,
+                         lowest_price as lowest_price')
             ->get();
         return $result;
     }
@@ -124,16 +123,16 @@ class CoinsExchangeEloquentRepository extends EloquentRepository implements Coin
         ->where('coins.base_currency', '=', $marketName)
         ->where('coins.market_currency', '=', $coinName)
         ->where('coins_exchange.created_at', '>', $dayAgo)
-        ->selectRaw('ANY_VALUE(market_currency) as coin_name,
-                     ANY_VALUE(coin_id) as coin_id,
-                     ANY_VALUE((highest_price - lowest_price)*100/lowest_price) as change_rate,
-                     ANY_VALUE(base_volume) as base_volume,
-                     ANY_VALUE(open_buy_orders) as open_buy_orders,
-                     ANY_VALUE(open_sell_orders) as open_sell_orders,
-                     ANY_VALUE(prev_day) as prev_day,
-                     ANY_VALUE(highest_price) as highest_price,
-                     ANY_VALUE(lowest_price) as lowest_price,
-                     ANY_VALUE(coins_exchange.created_at) as created_at')
+        ->selectRaw('market_currency as coin_name,
+                     coin_id as coin_id,
+                     (highest_price - lowest_price)*100/lowest_price as change_rate,
+                     base_volume as base_volume,
+                     open_buy_orders as open_buy_orders,
+                     open_sell_orders as open_sell_orders,
+                     prev_day as prev_day,
+                     highest_price as highest_price,
+                     lowest_price as lowest_price,
+                     coins_exchange.created_at as created_at')
          ->orderBy('coins_exchange.created_at')
          ->get();
                          
