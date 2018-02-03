@@ -20,7 +20,7 @@ class SecretArea
     {
         if (!Sentinel::getUser())
         {
-            return URL::route('dashboard');
+            return redirect()->route('auth.login.form');
         }
         return $next($request);
     }
