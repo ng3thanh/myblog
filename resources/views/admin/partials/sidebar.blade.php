@@ -99,7 +99,7 @@
 						</a>
 						<ul class="treeview-menu">
 							<li>
-								<a href="#">
+								<a href="{{ URL::route('money.index') }}">
 									<i class="fa fa-calculator"></i> Money
 								</a>
 							</li>

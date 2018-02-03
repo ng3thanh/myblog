@@ -14,7 +14,7 @@ class MoneyController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.personal.economy.money.index');
     }
 
     /**

@@ -68,7 +68,7 @@ Route::middleware('web')->domain('admin.' . env('APP_DOMAIN'))->namespace('Admin
     });
 
     Route::prefix('mailbox')->group(function () {
-        Route::resource('mailbox', 'MailboxController');
+        Route::resource('mailbox', 'ailboxController');
     });
 });
 
