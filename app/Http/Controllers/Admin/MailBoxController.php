@@ -14,7 +14,7 @@ class MailBoxController extends Controller
      */
     public function index()
     {
-        return view('admin.mailbox.index');
+        return view('admin.pages.mailbox.index');
     }
 
     /**

@@ -15,7 +15,7 @@ class ProfileController extends Controller
     public function index()
     {
         $user = ['username' => 'Thanh'];
-        return view('admin.profile.index', ['user' => $user]);
+        return view('admin.pages.profile.index', ['user' => $user]);
     }
 
     /**
