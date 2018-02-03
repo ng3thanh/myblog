@@ -13,21 +13,58 @@
 Route::middleware('web')->domain('admin.' . env('APP_DOMAIN'))->namespace('Admin')->group(function () {
 	
     Route::get('/', 'DashboardController@index')->name('main');
-    
-    Route::prefix('config')->group(function () {
-        Route::resource('config', 'ConfigController');
+
+    Route::prefix('personal')->namespace('Personal')->group(function () {
+        Route::prefix('health')->namespace('Health')->group(function () {
+            Route::resource('health_check', 'HealthCheckController');
+            Route::resource('healthy_diet', 'HealthyDietController');
+            Route::resource('gym', 'GymController');
+        });
+        Route::prefix('economy')->namespace('Economy')->group(function () {
+            Route::resource('money', 'MoneyController');
+            Route::resource('invest', 'InvestController');
+        });
+        Route::prefix('education')->namespace('Education')->group(function () {
+            Route::resource('books', 'BooksController');
+            Route::resource('learning', 'LearningController');
+            Route::resource('orientation', 'OrientationController');
+        });
+        Route::prefix('culture')->namespace('Culture')->group(function () {
+            Route::resource('note', 'NoteController');
+            Route::resource('diary', 'DiaryController');
+        });
     });
-    
-    Route::prefix('schedule')->group(function () {
-        Route::resource('schedule', 'ScheduleController');
-    });
-    
+
     Route::prefix('coin')->group(function () {
         Route::resource('ncoin', 'CoinNormalController');
     });
-    
+
+    Route::prefix('invest')->group(function () {
+        Route::resource('invest', 'InvestmentController');
+    });
+
+    Route::prefix('schedule')->group(function () {
+        Route::resource('schedule', 'ScheduleController');
+    });
+
+    Route::prefix('users')->group(function () {
+        Route::resource('users', 'UserController');
+    });
+
+    Route::prefix('role')->group(function () {
+        Route::resource('role', 'RoleController');
+    });
+
     Route::prefix('static')->group(function () {
         Route::resource('static', 'StaticController');
+    });
+
+    Route::prefix('config')->group(function () {
+        Route::resource('config', 'ConfigController');
+    });
+
+    Route::prefix('profile')->group(function () {
+        Route::resource('profile', 'ProfileController');
     });
 });
 

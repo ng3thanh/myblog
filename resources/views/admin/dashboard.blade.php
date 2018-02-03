@@ -12,7 +12,8 @@
 				<div class="inner">
 					<h3>{{ $totalCoins }}</h3>
 					@if(true)
-					<p>Coins Up</p>
+					<p>Tổng số coin</p>
+					<p>Giá bitcoin tại thời điểm mới nhất</p>
 					@else
 					<p>Coins Down</p>
 					@endif
@@ -32,7 +33,7 @@
 						53<sup style="font-size: 20px">%</sup>
 					</h3>
 
-					<p>Bounce Rate</p>
+					<p>% công việc đã hoàn thành</p>
 				</div>
 				<div class="icon">
 					<i class="ion ion-stats-bars"></i>
@@ -47,7 +48,7 @@
 				<div class="inner">
 					<h3>44</h3>
 
-					<p>User Registrations</p>
+					<p>Số tiền dương</p>
 				</div>
 				<div class="icon">
 					<i class="ion ion-person-add"></i>
@@ -62,7 +63,7 @@
 				<div class="inner">
 					<h3>65</h3>
 
-					<p>Unique Visitors</p>
+					<p>Số ngày còn lại đến mục tiêu gần nhất</p>
 				</div>
 				<div class="icon">
 					<i class="ion ion-pie-graph"></i>
@@ -75,6 +76,71 @@
 	<!-- /.row -->
 	<!-- Main row -->
 	<div class="row">
+		<div class="col-lg-12">
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Danh mục task cần làm</h3>
+
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+						</button>
+						<div class="btn-group">
+							<button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+								<i class="fa fa-wrench"></i></button>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+							</ul>
+						</div>
+						<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+					</div>
+				</div>
+				<!-- /.box-header -->
+
+				<div class="box-body">
+					+ Chức năng version 1:<br><br>
+
+					-- Đăng nhập admin<br>
+					-- Phân quyền: 3 mốc Amin (All) + Mod (Block user) + User<br>
+					-- Quản lý tài khoản: Đối với admin<br>
+					-- Quản lý quyền: Đối với Admin<br>
+					-- Lấy thông tin Bitcoin trên Bittrex (OK)<br>
+					-- Theo dõi từng Coin: <br>
+					-- Dự đoán Coin<br>
+					-- Setting website: Setting website<br>
+					-- Theo dõi website: Theo dõi những ai truy cập<br>
+					-- Tạo lịch<br>
+					-- Chat<br>
+					-- Thông tin người dùng<br>
+					-- Thông báo<br><br>
+
+					+ Chức năng version 2:<br><br>
+
+					Cá nhân:<br><br>
+
+					+ Theo dõi sức khỏe: Theo dõi các thông số cá nhân (đính kèm ảnh: hàng tháng)<br>
+					+ Chế độ ăn: 1. Tuyển tập thức ăn chứa calo + 2. Tính toán lượng calo cần thiết cho bản thân<br>
+					+ Gym: Bài tập gym + theo dõi hàng ngày<br>
+					+ Sách báo: Sách đã đọc + đã mua + Nhận xét về sách (comment = tiếng anh)<br>
+					+ Học tập: Kế hoạch học tập + theo dõi hàng ngày<br>
+					+ Tiền bạc: Thu + chi + cho vay + phân chia các khoản được phép tiêu<br>
+					+ Định hướng: Mục tiêu dài hạn + mục tiêu ngắn hạn<br>
+					+ Đầu tư: Các khoản đầu tư + theo dõi diễn biến đầu tư<br>
+					+ Ghi chú: Các note cá nhân<br>
+					+ Nhật ký cá nhân: Viết nhật ký hàng ngày (bằng tiếng anh)<br><br>
+
+					Quản lý lý lịch: - Cho phép hiển thị và không hiển thị gì trên màn hình bên ngoài<br><br>
+
+					Theo dõi ai đó: Thông báo ngày sinh + facebook của ai đó để chúc mừng.<br><br>
+				</div>
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col -->
+
 		<!-- Left col -->
 		<section class="col-lg-7 connectedSortable">
 		
