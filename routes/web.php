@@ -66,6 +66,10 @@ Route::middleware('web')->domain('admin.' . env('APP_DOMAIN'))->namespace('Admin
     Route::prefix('profile')->group(function () {
         Route::resource('profile', 'ProfileController');
     });
+
+    Route::prefix('mailbox')->group(function () {
+        Route::resource('mailbox', 'MailboxController');
+    });
 });
 
 Route::middleware('auth')->domain(env('APP_DOMAIN'))->group(function () {

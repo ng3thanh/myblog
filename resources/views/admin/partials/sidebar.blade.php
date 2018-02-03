@@ -225,7 +225,7 @@
 			</li>
 
 			<li>
-				<a href="pages/widgets.html">
+				<a href="{{ URL::route('schedule.index') }}">
 					<i class="fa fa-calendar"></i>
 					<span> Schedule Management</span>
 					<span class="pull-right-container">

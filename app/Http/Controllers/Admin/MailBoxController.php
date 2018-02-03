@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ScheduleController extends Controller
+class MailBoxController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        return view('admin.schedule.index');
+        return view('admin.mailbox.index');
     }
 
     /**

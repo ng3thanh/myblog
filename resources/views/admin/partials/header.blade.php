@@ -84,7 +84,7 @@
 								</a></li>
 							</ul>
 						</li>
-						<li class="footer"><a href="#">See All Messages</a></li>
+						<li class="footer"><a href="{{ URL::route('mailbox.index') }}">See All Messages</a></li>
 					</ul></li>
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu">
