@@ -101,40 +101,69 @@
 				<!-- /.box-header -->
 
 				<div class="box-body">
-					+ Chức năng version 1:<br><br>
+					+ Version 1:<br><br>
 
-					-- Đăng nhập admin<br>
-					-- Phân quyền: 3 mốc Amin (All) + Mod (Block user) + User<br>
-					-- Quản lý tài khoản: Đối với admin<br>
-					-- Quản lý quyền: Đối với Admin<br>
-					-- Lấy thông tin Bitcoin trên Bittrex (OK)<br>
+					-- Tạo giao diện đơn giản (OK)<br>
+					-- Lấy thông tin Bitcoin trên Bittrex (OK)<br><br>
+
+					+ Version 2: 04/02/2018<br><br>
+
+					-- Đăng nhập admin<br><br>
+
+					+ Version 3.0: Cá nhân<br><br>
+
+					-- Ghi chú: Các note cá nhân<br>
+					-- Nhật ký cá nhân: Viết nhật ký hàng ngày (bằng tiếng anh)<br>
+					-- User profile. <br><br>
+
+					+ Version 3.1: Cá nhân<br><br>
+
+					-- Tiền bạc: Thu + chi + cho vay + phân chia các khoản được phép tiêu<br>
+					-- Định hướng: Mục tiêu dài hạn + mục tiêu ngắn hạn<br>
+					-- Đầu tư: Các khoản đầu tư + theo dõi diễn biến đầu tư<br><br>
+
+					+ Version 3.2: Cá nhân<br><br>
+
+					-- Theo dõi sức khỏe: Theo dõi các thông số cá nhân (đính kèm ảnh: hàng tháng)<br>
+					-- Chế độ ăn: 1. Tuyển tập thức ăn chứa calo + 2. Tính toán lượng calo cần thiết cho bản thân<br>
+					-- Gym: Bài tập gym + theo dõi hàng ngày<br><br>
+
+					+ Version 3.3: Cá nhân<br><br>
+
+					-- Sách báo: Sách đã đọc + đã mua + Nhận xét về sách (comment = tiếng anh)<br>
+					-- Học tập: Kế hoạch học tập + theo dõi hàng ngày<br><br>
+
+					+ Version 4:<br><br>
+
 					-- Theo dõi từng Coin: <br>
-					-- Dự đoán Coin<br>
+					-- Dự đoán Coin<br><br>
+
+					+ Version 5:<br><br>
+
+					-- Quản lý tài khoản: Đối với admin<br>
+					-- Quản lý quyền: Đối với Admin<br><br>
+
+					+ Version 6:<br><br>
+
+					--Quản lý lý lịch: - Cho phép hiển thị và không hiển thị gì trên màn hình bên ngoài<br>
+					--Theo dõi ai đó: Thông báo ngày sinh + facebook của ai đó để chúc mừng.<br><br>
+
+					+ Version 7:<br><br>
+
 					-- Setting website: Setting website<br>
-					-- Theo dõi website: Theo dõi những ai truy cập<br>
+					-- Theo dõi website: Theo dõi những ai truy cập<br><br>
+
+					+ Version 8:<br><br>
+
+					-- Phân quyền: 3 mốc Amin (All) + Mod (Block user) + User<br><br>
+
+					+ Version 9: <br><br>
+
 					-- Tạo lịch<br>
 					-- Chat<br>
 					-- Thông tin người dùng<br>
 					-- Thông báo<br><br>
 
-					+ Chức năng version 2:<br><br>
-
-					Cá nhân:<br><br>
-
-					+ Theo dõi sức khỏe: Theo dõi các thông số cá nhân (đính kèm ảnh: hàng tháng)<br>
-					+ Chế độ ăn: 1. Tuyển tập thức ăn chứa calo + 2. Tính toán lượng calo cần thiết cho bản thân<br>
-					+ Gym: Bài tập gym + theo dõi hàng ngày<br>
-					+ Sách báo: Sách đã đọc + đã mua + Nhận xét về sách (comment = tiếng anh)<br>
-					+ Học tập: Kế hoạch học tập + theo dõi hàng ngày<br>
-					+ Tiền bạc: Thu + chi + cho vay + phân chia các khoản được phép tiêu<br>
-					+ Định hướng: Mục tiêu dài hạn + mục tiêu ngắn hạn<br>
-					+ Đầu tư: Các khoản đầu tư + theo dõi diễn biến đầu tư<br>
-					+ Ghi chú: Các note cá nhân<br>
-					+ Nhật ký cá nhân: Viết nhật ký hàng ngày (bằng tiếng anh)<br><br>
-
-					Quản lý lý lịch: - Cho phép hiển thị và không hiển thị gì trên màn hình bên ngoài<br><br>
-
-					Theo dõi ai đó: Thông báo ngày sinh + facebook của ai đó để chúc mừng.<br><br>
 				</div>
 			</div>
 			<!-- /.box -->

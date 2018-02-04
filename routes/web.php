@@ -72,12 +72,6 @@ Route::middleware('secret')->domain('admin.' . env('APP_DOMAIN'))->namespace('Ad
     });
 });
 
-Route::middleware('auth')->domain(env('APP_DOMAIN'))->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-});
-
 Route::middleware('guest')->domain(env('APP_DOMAIN'))->group(function () {
     Route::get('/', function () {
         return view('welcome');

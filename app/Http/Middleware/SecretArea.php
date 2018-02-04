@@ -18,7 +18,7 @@ class SecretArea
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (!Sentinel::getUser())
+        if (Sentinel::check())
         {
             return redirect()->route('auth.login.form');
         }

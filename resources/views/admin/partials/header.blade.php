@@ -225,7 +225,7 @@
 								<a href="{{ URL::route('profile.index') }}" class="btn btn-default btn-flat">Profile</a>
 							</div>
 							<div class="pull-right">
-								<a href="#" class="btn btn-default btn-flat">Sign out</a>
+								<a href="{{ URL::route('auth.logout') }}" class="btn btn-default btn-flat">Sign out</a>
 							</div>
 						</li>
 					</ul></li>
