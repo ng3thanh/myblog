@@ -40,7 +40,7 @@ class SessionController extends Controller
     public function postLogin(Request $request)
     {
         // Validate the Form Data
-        $result = $this->validate($request, [
+        $validate = $this->validate($request, [
             'email' => 'required',
             'password' => 'required'
         ]);
@@ -56,7 +56,7 @@ class SessionController extends Controller
         $result = $this->authManager->authenticate($credentials, $remember);
 
         // Return the appropriate response
-        $path = session()->pull('url.intended', route('dashboard'));
+        $path = session()->pull('url.intended', route('main'));
         return $result->dispatch($path);
     }
 

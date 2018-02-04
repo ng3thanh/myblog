@@ -40,51 +40,164 @@
     				<span> Dashboard</span>
     			</a>
 			</li>
-			
+
 			<li class="treeview">
-				<a href="#"> 
-					<i class="fa fa-users"></i> 
-					<span> Member Management</span> 
-					<span class="pull-right-container"> 
-						<span class="label label-primary pull-right">4</span>
-					</span>
+				<a href="#">
+					<i class="fa fa-share"></i>
+					<span>Personal Management</span>
+					<span class="pull-right-container">
+              			<i class="fa fa-angle-left pull-right"></i>
+            		</span>
 				</a>
 				<ul class="treeview-menu">
-					<li>
-						<a href="pages/layout/top-nav.html">
-							<i class="fa fa-circle-o"></i> Top Navigation
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-heartbeat"></i> Health
+							<span class="pull-right-container">
+                  				<i class="fa fa-angle-left pull-right"></i>
+							</span>
 						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="#">
+									<i class="fa fa-stethoscope"></i> Health check
+								</a>
+							</li>
+							<li class="treeview">
+								<a href="#">
+									<i class="fa fa-plus-square"></i> Healthy diet
+									<span class="pull-right-container">
+                      					<i class="fa fa-angle-left pull-right"></i>
+                    				</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="#"><i class="fa fa-circle-o"></i> List food</a></li>
+									<li><a href="#"><i class="fa fa-circle-o"></i> Follow</a></li>
+								</ul>
+							</li>
+							<li class="treeview">
+								<a href="#">
+									<i class="fa fa-wheelchair"></i> Gym
+									<span class="pull-right-container">
+                      					<i class="fa fa-angle-left pull-right"></i>
+                    				</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="#"><i class="fa fa-circle-o"></i> Exercise</a></li>
+									<li><a href="#"><i class="fa fa-circle-o"></i> Follow</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-credit-card"></i> Economy
+							<span class="pull-right-container">
+                  				<i class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="{{ URL::route('money.index') }}">
+									<i class="fa fa-calculator"></i> Money
+								</a>
+							</li>
+							<li class="treeview">
+								<a href="#">
+									<i class="fa fa-deaf"></i> Investment
+									<span class="pull-right-container">
+                      					<i class="fa fa-angle-left pull-right"></i>
+                    				</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-gg-circle"></i> Education
+							<span class="pull-right-container">
+                  				<i class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="#">
+									<i class="fa fa-book"></i> Books
+								</a>
+							</li>
+							<li class="treeview">
+								<a href="#">
+									<i class="fa fa-child"></i> Learning
+									<span class="pull-right-container">
+                      					<i class="fa fa-angle-left pull-right"></i>
+                    				</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">
+									<i class="fa fa-certificate"></i> Orientation
+								</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-envira"></i> Culture
+							<span class="pull-right-container">
+                  				<i class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+						<ul class="treeview-menu">
+							<li>
+								<a href="#">
+									<i class="fa fa-sticky-note"></i> Personal Notes
+								</a>
+							</li>
+							<li class="treeview">
+								<a href="#">
+									<i class="fa fa-eraser"></i> Personal Diary
+									<span class="pull-right-container">
+                      					<i class="fa fa-angle-left pull-right"></i>
+                    				</span>
+								</a>
+								<ul class="treeview-menu">
+									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+								</ul>
+							</li>
+						</ul>
 					</li>
 				</ul>
 			</li>
-			
-			<li>
-				<a href="pages/widgets.html"> 
-					<i class="fa fa-calendar"></i> 
-					<span> Schedule Management</span>
-					<span class="pull-right-container"> 
-						<small class="label pull-right bg-green">new</small>
-					</span>
-				</a>
-			</li>
-			
+
 			<li class="treeview">
-				<a href="#"> 
-					<i class="fa fa-laptop"></i> 
-					<span> Role Management</span> 
-					<span class="pull-right-container"> 
+				<a href="#">
+					<i class="fa fa-bitcoin"></i>
+					<span> Bitcoin Tracking</span>
+					<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 					</span>
 				</a>
 				<ul class="treeview-menu">
 					<li>
-						<a href="pages/UI/general.html">
-							<i class="fa fa-circle-o"></i>General
+						<a href="{{ URL::route('ncoin.index') }}">
+							<i class="fa fa-circle-o"></i>Normal Tracking
 						</a>
 					</li>
 				</ul>
 			</li>
-			
+
 			<li class="treeview">
 				<a href="#"> <i class="fa fa-usd"></i> 
 					<span> Invest Management</span>
@@ -110,24 +223,51 @@
 					</li>
 				</ul>
 			</li>
-			
+
+			<li>
+				<a href="{{ URL::route('schedule.index') }}">
+					<i class="fa fa-calendar"></i>
+					<span> Schedule Management</span>
+					<span class="pull-right-container">
+						<small class="label pull-right bg-green">new</small>
+					</span>
+				</a>
+			</li>
+
 			<li class="treeview">
-				<a href="#"> 
-					<i class="fa fa-bitcoin"></i> 
-					<span> Bitcoin Tracking</span>
-					<span class="pull-right-container"> 
+				<a href="#">
+					<i class="fa fa-users"></i>
+					<span> Member Management</span>
+					<span class="pull-right-container">
+						<span class="label label-primary pull-right">4</span>
+					</span>
+				</a>
+				<ul class="treeview-menu">
+					<li>
+						<a href="pages/layout/top-nav.html">
+							<i class="fa fa-circle-o"></i> Top Navigation
+						</a>
+					</li>
+				</ul>
+			</li>
+
+			<li class="treeview">
+				<a href="#">
+					<i class="fa fa-laptop"></i>
+					<span> Role Management</span>
+					<span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 					</span>
 				</a>
 				<ul class="treeview-menu">
 					<li>
-						<a href="{{ URL::route('ncoin.index') }}">
-							<i class="fa fa-circle-o"></i>Normal Tracking
+						<a href="pages/UI/general.html">
+							<i class="fa fa-circle-o"></i>General
 						</a>
 					</li>
 				</ul>
 			</li>
-			
+
 			<li class="treeview">
 				<a href="#"> 
 					<i class="fa fa-object-group"></i> 

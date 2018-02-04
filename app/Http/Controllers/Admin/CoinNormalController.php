@@ -28,7 +28,7 @@ class CoinNormalController extends Controller
     public function index()
     {
         $data = $this->coinsExchangeRepository->getCoinExchangeInLastTime();
-        return view('admin.coin.normal.normal', [
+        return view('admin.pages.coin.normal.normal', [
             'data' => $data
         ]);
     }
@@ -76,7 +76,7 @@ class CoinNormalController extends Controller
 
 //         dd($highest);
 
-        return view('admin.coin.normal.detail', [
+        return view('admin.pages.coin.normal.detail', [
             'coin' => $coinName,
             'data' => $realData,
             'detailData' => $detailData,
