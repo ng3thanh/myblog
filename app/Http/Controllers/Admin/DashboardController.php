@@ -30,7 +30,7 @@ class DashboardController extends Controller
         $lowestCoins = $this->coinsExchangeRepository->getLowestChangeRateCoin();
         $highestCoins = $this->coinsExchangeRepository->getHighestChangeRateCoin();
         
-        return view('admin.dashboard', [
+        return view('admin.pages.dashboard', [
             'totalCoins' => $totalCoins,
             'lowestCoins' => $lowestCoins,
             'highestCoins' => $highestCoins
