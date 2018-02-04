@@ -160,7 +160,7 @@
 						</a>
 						<ul class="treeview-menu">
 							<li>
-								<a href="#">
+								<a href="{{ URL::route('note.index') }}">
 									<i class="fa fa-sticky-note"></i> Personal Notes
 								</a>
 							</li>

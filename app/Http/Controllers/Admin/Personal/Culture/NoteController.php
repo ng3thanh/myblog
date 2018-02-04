@@ -14,7 +14,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.personal.culture.notes.index');
     }
 
     /**
