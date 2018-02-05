@@ -24,7 +24,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.personal.culture.notes.create');
     }
 
     /**
