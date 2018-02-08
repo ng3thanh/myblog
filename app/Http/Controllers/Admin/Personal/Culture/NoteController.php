@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Personal\Culture;
 
+use App\Models\Personal\Culture\Notes;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +16,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.pages.personal.culture.notes.index');
     }
 
     /**
@@ -24,7 +26,8 @@ class NoteController extends Controller
      */
     public function create()
     {
-        //
+        $status = [Notes::ENABLE => 'Enable', Notes::DISABLE => 'Disable'];
+        return view('admin.pages.personal.culture.notes.create',['status'=>$status]);
     }
 
     /**
@@ -35,7 +38,9 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = Sentinel::getUser();
+
+        $id = 1;
     }
 
     /**

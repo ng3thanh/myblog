@@ -104,15 +104,15 @@
 					+ Version 1:<br><br>
 
 					-- Tạo giao diện đơn giản (OK)<br>
-					-- Lấy thông tin Bitcoin trên Bittrex (OK)<br><br>
+					-- Lấy thông tin Bitcoin trên Bittrex (Raw)<br><br>
 
 					+ Version 2: 04/02/2018<br><br>
 
-					-- Đăng nhập admin<br><br>
+					-- Đăng nhập admin (Raw)<br><br>
 
 					+ Version 3.0: Cá nhân<br><br>
 
-					-- Ghi chú: Các note cá nhân<br>
+					-- Ghi chú: Các note cá nhân (Inprogress) <br>
 					-- Nhật ký cá nhân: Viết nhật ký hàng ngày (bằng tiếng anh)<br>
 					-- User profile. <br><br>
 
