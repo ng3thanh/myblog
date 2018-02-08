@@ -17,6 +17,7 @@ class CreateNotesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('title');
+            $table->text('description');
             $table->longText('content');
             $table->integer('notification')->comment('1: Yes, 0: No');
             $table->dateTime('date_notification');

@@ -3,10 +3,11 @@
 namespace App\Models\Personal\Culture;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Notes extends Model
 {
-    const SHOW = 1;
+    const ENABLE = 1;
     const DISABLE = 0;
 
     use Notifiable;

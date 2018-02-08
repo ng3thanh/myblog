@@ -13,6 +13,9 @@
                 <div class="box-header">
                     <i class="ion ion-clipboard"></i>
                     <h3 class="box-title">Notes for something</h3>
+                    <div class="box-tools pull-right">
+                        <a href="{{ URL::route('note.create') }}" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add note</a>
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -57,8 +60,8 @@
             <!-- About Me Box -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <i class="fa fa-plus"></i>
-                    <h3 class="box-title">Add new note</h3>
+                    <i class="fa fa-pencil margin-r-5"></i>
+                    <h3 class="box-title">Title | Design a nice theme</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
