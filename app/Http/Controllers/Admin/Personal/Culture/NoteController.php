@@ -24,7 +24,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = $this->notesRepository->paginate(10);
+        $notes = $this->notesRepository->paginate(10, 'desc');
         $lastNote = $this->notesRepository->getLastItemOrderBy('created_at', 'desc');
         return view('admin.pages.personal.culture.notes.index', ['notes' => $notes, 'lastNote' => $lastNote]);
     }

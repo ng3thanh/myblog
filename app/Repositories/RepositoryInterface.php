@@ -43,7 +43,7 @@ interface RepositoryInterface
      * @param $paging
      * @return mixed
      */
-    public function paginate($paging);
+    public function paginate($paging, $sort = 'asc', $orderBy = 'created_at');
 
     /**
      * Get last item base on order by
@@ -51,5 +51,5 @@ interface RepositoryInterface
      * @param string $sort
      * @return mixed
      */
-    public function getLastItemOrderBy($orderBy, $sort = 'asc');
+    public function getLastItemOrderBy($orderBy = 'created_at', $sort = 'asc');
 }

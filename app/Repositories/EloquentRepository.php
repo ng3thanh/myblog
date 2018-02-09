@@ -140,8 +140,8 @@ abstract class EloquentRepository implements RepositoryInterface
      * @param $paging
      * @return mixed
      */
-    public function paginate($paging){
-        return $this->_model->paginate($paging);
+    public function paginate($paging, $sort = 'asc', $orderBy = 'created_at'){
+        return $this->_model->orderBy($orderBy, $sort)->paginate($paging);
     }
 
     /**
@@ -151,7 +151,7 @@ abstract class EloquentRepository implements RepositoryInterface
      * @param string $sort
      * @return mixed
      */
-    public function getLastItemOrderBy($orderBy, $sort = 'asc') {
+    public function getLastItemOrderBy($orderBy = 'created_at', $sort = 'asc') {
         return $this->_model->orderBy($orderBy, $sort)->firstOrFail();
     }
 }

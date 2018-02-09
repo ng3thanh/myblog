@@ -68,7 +68,7 @@
                                         <!-- select -->
                                         <div class="form-group">
                                             <label class="label-box-edit"><i class="fa fa-check-circle"> </i> Select status</label>
-                                            <select name="status" class="form-control">
+                                            <select name="status" class="form-control" value="{{ old('status') }}">
                                                 @foreach($status as $key => $value)
                                                     <option value="{{ $key }}" @if($key == $note->status) selected @endif >{{ $value }}</option>
                                                 @endforeach
@@ -100,26 +100,26 @@
 @section('script')
     <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
     <script>
-      $(function () {
-        CKEDITOR.replace('note_editer')
-        $('.textarea').wysihtml5()
+        $(function () {
+            CKEDITOR.replace('note_editer')
+            $('.textarea').wysihtml5()
 
-        if($('#notification').is(":checked")){
-          $('#notification_date').prop('disabled', false);
-        }
+            if($('#notification').is(":checked")){
+                $('#notification_date').prop('disabled', false);
+            }
 
-      })
+        })
 
-      $('#notification_date').datepicker({
-        autoclose: true
-      })
+        $('#notification_date').datepicker({
+            autoclose: true
+        })
 
-      $('#notification').click(function() {
-        if($('#notification').is(":checked")){
-          $('#notification_date').prop('disabled', false);
-        } else {
-          $('#notification_date').prop('disabled', true);
-        }
-      })
+        $('#notification').click(function() {
+            if($('#notification').is(":checked")){
+                $('#notification_date').prop('disabled', false);
+            } else {
+                $('#notification_date').prop('disabled', true);
+            }
+        })
     </script>
 @endsection
