@@ -1,0 +1,14 @@
+.crop-title-75 {
+    max-width: 75%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.label-box-create {
+    color: #3c8dbc;
+}
+
+.label-box-edit {
+    color: #f39c12;
+}

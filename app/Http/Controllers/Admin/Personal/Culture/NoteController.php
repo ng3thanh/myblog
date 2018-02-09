@@ -53,11 +53,10 @@ class NoteController extends Controller
         unset($data['_token']);
         $note = $this->notesRepository->create($data);
         if ($note) {
-            return view('admin.pages.personal.culture.notes.index');
+            return Redirect::route('note.index');
         } else {
             return Redirect::back();
         }
-
     }
 
     /**
@@ -93,7 +92,15 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
+        $data = $request->all();
+        unset($data['_token']);
+        unset($data['_method']);
+        $note = $this->notesRepository->update($id, $data);
+        if ($note) {
+            return Redirect::route('note.index');
+        } else {
+            return Redirect::back();
+        }
     }
 
     /**

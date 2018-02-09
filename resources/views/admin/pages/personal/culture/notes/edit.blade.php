@@ -19,6 +19,7 @@
                     <div class="box-body pad">
                         <form method="POST" action="{{ URL::route('note.update', $note->id) }}" id="edit-note">
                         {{ csrf_field() }}
+                        {{ method_field('PUT') }}
                         <!-- /.box-header -->
                             <div class="col-md-6">
                                 <div class="box box-warning">
@@ -35,16 +36,16 @@
                                     <div class="box-body">
                                         <!-- text input -->
                                         <div class="form-group">
-                                            <label style="color: #f39c12"><i class="fa fa-edit"></i> Title</label>
+                                            <label class="label-box-edit"><i class="fa fa-edit"></i> Title</label>
                                             <input type="text" name="title" class="form-control" value="{{ $note->title }}">
                                         </div>
                                         <!-- textarea -->
                                         <div class="form-group">
-                                            <label style="color: #f39c12"><i class="fa fa-archive"></i> Description</label>
+                                            <label class="label-box-edit"><i class="fa fa-archive"></i> Description</label>
                                             <textarea name="description" class="form-control" rows="3">{{ $note->description }}</textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label style="color: #f39c12"><i class="fa fa-newspaper-o"></i> Notification</label>
+                                            <label class="label-box-edit"><i class="fa fa-newspaper-o"></i> Notification</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <input name="notification" id="notification" type="checkbox" value="1" @if($note->notification) checked @endif>
@@ -55,7 +56,7 @@
 
                                         <!-- select -->
                                         <div class="form-group">
-                                            <label style="color: #f39c12"><i class="fa fa-check-circle"> </i> Select status</label>
+                                            <label class="label-box-edit"><i class="fa fa-check-circle"> </i> Select status</label>
                                             <select name="status" class="form-control">
                                                 @foreach($status as $key => $value)
                                                     <option value="{{ $key }}" @if($key == $note->status) selected @endif >{{ $value }}</option>

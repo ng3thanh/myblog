@@ -6,7 +6,9 @@
 
 @section('title', 'Notes')
 
-@section('css') @endsection
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/pages/note.css') }}">
+@endsection
 
 @section('content')
     <!-- Main content -->
@@ -27,17 +29,16 @@
                     <ul class="todo-list">
                         @foreach($notes as $key => $note)
                         <li>
+                            <!-- Emphasis label -->
+                            <small class="label label-info"><i class="fa fa-clock-o"></i>  {{ DateHelper::getPeriodOfTime($note->created_at) }}</small>
                             <!-- drag handle -->
                             <span class="handle">
                                 <i class="fa fa-ellipsis-v"></i>
                                 <i class="fa fa-ellipsis-v"></i>
                             </span>
-                            <!-- checkbox -->
-                            <input type="checkbox" value="" id="show-content">
                             <!-- todo text -->
-                            <span class="text">{{ $note->title }}</span>
-                            <!-- Emphasis label -->
-                            <small class="label label-info"><i class="fa fa-clock-o"></i>  {{ DateHelper::getPeriodOfTime($note->created_at) }}</small>
+                            <span class="text crop-title-75">{{ $note->title }}</span>
+
                             <!-- General tools such as edit or delete-->
                             <div class="tools">
                                 <a href="{{ URL::route('note.edit', $note->id) }}"><i class="fa fa-edit"></i></a>

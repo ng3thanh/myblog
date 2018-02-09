@@ -36,16 +36,16 @@
                                     <div class="box-body">
                                         <!-- text input -->
                                         <div class="form-group">
-                                            <label style="color: #3c8dbc"><i class="fa fa-edit"></i> Title</label>
+                                            <label class="label-box-create"><i class="fa fa-edit"></i> Title</label>
                                             <input type="text" name="title" class="form-control" placeholder="Enter title">
                                         </div>
                                         <!-- textarea -->
                                         <div class="form-group">
-                                            <label style="color: #3c8dbc"><i class="fa fa-archive"></i> Description</label>
+                                            <label class="label-box-create"><i class="fa fa-archive"></i> Description</label>
                                             <textarea name="description" class="form-control" rows="3">Some note in {{ date('d-m-Y') }}</textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label style="color: #3c8dbc"><i class="fa fa-newspaper-o"></i> Notification</label>
+                                            <label class="label-box-create"><i class="fa fa-newspaper-o"></i> Notification</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <input name="notification" id="notification" type="checkbox" value="1">
@@ -56,7 +56,7 @@
 
                                         <!-- select -->
                                         <div class="form-group">
-                                            <label style="color: #3c8dbc"><i class="fa fa-check-circle"> </i> Select status</label>
+                                            <label class="label-box-create"><i class="fa fa-check-circle"> </i> Select status</label>
                                             <select name="status" class="form-control">
                                                 @foreach($status as $key => $value)
                                                     <option value="{{ $key }}">{{ $value }}</option>
