@@ -1,0 +1,15 @@
+.crop-span{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#crop-span-ellipsis{
+    margin-top: 2px;
+    width: 10px;
+}
+
+.last-title-box-index{
+    color: #3c8dbc;
+    font-weight: 600;
+}

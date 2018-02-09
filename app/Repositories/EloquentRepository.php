@@ -48,13 +48,12 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Get one
      *
-     * @param
-     *            $id
+     * @param $id
      * @return mixed
      */
     public function find($id)
     {
-        $result = $this->_model->find($id);
+        $result = $this->_model->findOrFail($id);
         return $result;
     }
 
@@ -143,5 +142,16 @@ abstract class EloquentRepository implements RepositoryInterface
      */
     public function paginate($paging){
         return $this->_model->paginate($paging);
+    }
+
+    /**
+     * Get last item base on order by
+     *
+     * @param $orderBy
+     * @param string $sort
+     * @return mixed
+     */
+    public function getLastItemOrderBy($orderBy, $sort = 'asc') {
+        return $this->_model->orderBy($orderBy, $sort)->firstOrFail();
     }
 }
