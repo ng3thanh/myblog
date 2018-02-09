@@ -38,9 +38,8 @@
                                 <i class="fa fa-ellipsis-v"></i>
                                 <i class="fa fa-ellipsis-v"></i>
                             </span>
-                            
-                            <span class="text crop-title-75" id="title-note-index"><a href="{{ URL::route('note.show', $note->id) }}">{{ $note->title }}</a> </span>
 
+                            <span class="text crop-title-75" id="title-note-index"><a href="{{ URL::route('note.show', $note->id) }}">{{ $note->title }}</a> </span>
                             <!-- General tools such as edit or delete-->
                             <div class="tools">
                                 <a href="{{ URL::route('note.edit', $note->id) }}"><i class="fa fa-edit"></i></a>
@@ -61,10 +60,12 @@
 
         <div class="col-md-6">
             <!-- About Me Box -->
-            <div class="box box-primary">
+            <div class="box box-primary" id="box-last-note">
                 <div class="box-header with-border">
                     <i class="fa fa-pencil margin-r-5"></i>
-                    <h3 class="box-title last-title-box-index">Last Note | <small class="crop-title-75">{{ $lastNote->title }}</small></h3>
+                    <h3 class="box-title last-title-box-index">Last Note |
+                        <small class="crop-title-75"><a href="{{ URL::route('note.show', $lastNote->id) }}">{{ $lastNote->title }}</a></small>
+                    </h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

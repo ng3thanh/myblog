@@ -24,7 +24,12 @@
                             <div class="col-md-6">
                                 <div class="box box-warning">
                                     <div class="box-body">
-                                        <textarea id="note_editer" name="content" rows="8" cols="60">{{ $note->content }}</textarea>
+                                        <div class="form-group @if ($errors->has('content')) has-error @endif">
+                                            <textarea id="note_editer" name="content" rows="8" cols="60">{{ $note->content }}</textarea>
+                                            @if ($errors->has('content'))
+                                                <span class="help-block">{{ $errors->first('content') }}</span>
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -35,14 +40,20 @@
                                     <!-- /.box-header -->
                                     <div class="box-body">
                                         <!-- text input -->
-                                        <div class="form-group">
+                                        <div class="form-group @if ($errors->has('title')) has-error @endif">
                                             <label class="label-box-edit"><i class="fa fa-edit"></i> Title</label>
                                             <input type="text" name="title" class="form-control" value="{{ $note->title }}">
+                                            @if ($errors->has('title'))
+                                                <span class="help-block">{{ $errors->first('title') }}</span>
+                                            @endif
                                         </div>
                                         <!-- textarea -->
-                                        <div class="form-group">
+                                        <div class="form-group @if ($errors->has('description')) has-error @endif">
                                             <label class="label-box-edit"><i class="fa fa-archive"></i> Description</label>
                                             <textarea name="description" class="form-control" rows="3">{{ $note->description }}</textarea>
+                                            @if ($errors->has('description'))
+                                                <span class="help-block">{{ $errors->first('description') }}</span>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label class="label-box-edit"><i class="fa fa-newspaper-o"></i> Notification</label>

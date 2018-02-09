@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Personal\Culture;
 
+use App\Http\Requests\Personal\Culture\CreateNoteRequest;
+use App\Http\Requests\Personal\Culture\EditNoteRequest;
 use App\Models\Personal\Culture\Notes;
 use App\Repositories\Personal\Culture\Notes\NotesEloquentRepository;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
@@ -45,7 +46,7 @@ class NoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateNoteRequest $request)
     {
         $user = Sentinel::getUser();
 
@@ -68,7 +69,8 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        //
+        $note = $this->notesRepository->find($id);
+        return view('admin.pages.personal.culture.notes.show',['note' => $note]);
     }
 
     /**
@@ -91,7 +93,7 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditNoteRequest $request, $id)
     {
         $data = $request->all();
         unset($data['_token']);

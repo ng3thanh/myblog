@@ -13,3 +13,13 @@
     color: #3c8dbc;
     font-weight: 600;
 }
+
+#box-last-note{
+    padding: 0px 10px 0px 10px;
+}
+
+.title-box-show{
+    color: #3c8dbc;
+    font-weight: 500;
+    font-size: 15px !important;
+}
