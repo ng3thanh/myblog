@@ -89,8 +89,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Update
      *
-     * @param
-     *            $id
+     * @param $id
      * @param array $attributes            
      * @return bool|mixed
      */
@@ -122,8 +121,7 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Delete
      *
-     * @param
-     *            $id
+     * @param $id
      * @return bool
      */
     public function delete($id)
@@ -135,5 +133,15 @@ abstract class EloquentRepository implements RepositoryInterface
         }
         
         return false;
+    }
+
+    /**
+     * Paginate data
+     *
+     * @param $paging
+     * @return mixed
+     */
+    public function paginate($paging){
+        return $this->_model->paginate($paging);
     }
 }

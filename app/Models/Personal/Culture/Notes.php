@@ -27,7 +27,10 @@ class Notes extends Model
     protected $fillable = [
         'user_id',
         'title',
+        'description',
         'content',
+        'notification',
+        'notification_date',
         'status'
     ];
 }

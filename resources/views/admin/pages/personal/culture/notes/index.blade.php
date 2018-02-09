@@ -1,3 +1,7 @@
+<?php
+    use \App\Helpers\Date\DateHelper;
+?>
+
 @extends('admin.layout')
 
 @section('title', 'Notes')
@@ -21,36 +25,32 @@
                 <div class="box-body">
                     <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
                     <ul class="todo-list">
+                        @foreach($notes as $key => $note)
                         <li>
                             <!-- drag handle -->
                             <span class="handle">
-                            <i class="fa fa-ellipsis-v"></i>
-                            <i class="fa fa-ellipsis-v"></i>
-                        </span>
+                                <i class="fa fa-ellipsis-v"></i>
+                                <i class="fa fa-ellipsis-v"></i>
+                            </span>
                             <!-- checkbox -->
-                            <input type="checkbox" value="">
+                            <input type="checkbox" value="" id="show-content">
                             <!-- todo text -->
-                            <span class="text">Design a nice theme</span>
+                            <span class="text">{{ $note->title }}</span>
                             <!-- Emphasis label -->
-                            <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                            <small class="label label-info"><i class="fa fa-clock-o"></i>  {{ DateHelper::getPeriodOfTime($note->created_at) }}</small>
                             <!-- General tools such as edit or delete-->
                             <div class="tools">
-                                <i class="fa fa-edit"></i>
-                                <i class="fa fa-trash-o"></i>
+                                <a href="{{ URL::route('note.edit', $note->id) }}"><i class="fa fa-edit"></i></a>
+                                <a href="#" id="test"><i class="fa fa-trash-o"></i></a>
                             </div>
                         </li>
+                        @endforeach
                     </ul>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer clearfix no-border">
                     <div class="box-tools pull-right">
-                        <ul class="pagination pagination-sm inline">
-                            <li><a href="#">&laquo;</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">&raquo;</a></li>
-                        </ul>
+                        {{ $notes->links() }}
                     </div>
                 </div>
             </div>
@@ -104,4 +104,5 @@
 @endsection
 
 @section('script')
+
 @endsection

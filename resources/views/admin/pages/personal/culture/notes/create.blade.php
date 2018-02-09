@@ -1,6 +1,6 @@
 @extends('admin.layout')
 
-@section('title', 'Create new notes')
+@section('title', 'Create new note')
 
 @section('css') @endsection
 
@@ -9,10 +9,10 @@
     <section class="content">
         <div class="row">
             <div class="col-md-12">
-                <div class="box box-warning">
+                <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title">
-                            <small>Create new notes</small>
+                            <small>Create new note</small>
                         </h3>
                     </div>
 
@@ -21,7 +21,7 @@
                             {{ csrf_field() }}
                             <!-- /.box-header -->
                             <div class="col-md-6">
-                                <div class="box box-warning">
+                                <div class="box box-info">
                                     <div class="box-body">
                                         <textarea id="note_editer" name="content" rows="8" cols="60">
                                         </textarea>
@@ -31,21 +31,21 @@
 
                             <div class="col-md-6">
                                 <!-- general form elements disabled -->
-                                <div class="box box-warning">
+                                <div class="box box-info">
                                     <!-- /.box-header -->
                                     <div class="box-body">
                                         <!-- text input -->
                                         <div class="form-group">
-                                            <label>Title</label>
+                                            <label style="color: #3c8dbc"><i class="fa fa-edit"></i> Title</label>
                                             <input type="text" name="title" class="form-control" placeholder="Enter title">
                                         </div>
                                         <!-- textarea -->
                                         <div class="form-group">
-                                            <label>Description</label>
+                                            <label style="color: #3c8dbc"><i class="fa fa-archive"></i> Description</label>
                                             <textarea name="description" class="form-control" rows="3">Some note in {{ date('d-m-Y') }}</textarea>
                                         </div>
                                         <div class="form-group">
-                                            <label>Notification</label>
+                                            <label style="color: #3c8dbc"><i class="fa fa-newspaper-o"></i> Notification</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <input name="notification" id="notification" type="checkbox" value="1">
@@ -56,7 +56,7 @@
 
                                         <!-- select -->
                                         <div class="form-group">
-                                            <label>Select status</label>
+                                            <label style="color: #3c8dbc"><i class="fa fa-check-circle"> </i> Select status</label>
                                             <select name="status" class="form-control">
                                                 @foreach($status as $key => $value)
                                                     <option value="{{ $key }}">{{ $value }}</option>
@@ -71,7 +71,7 @@
                         </form>
                     </div>
 
-                    <div class="box-footer">
+                    <div class="box-footer text-center">
                         <a href="{{ URL::route('note.index') }}" type="submit" class="btn btn-primary">Back</a>
                         <button form="add-note" type="submit" class="btn btn-primary">Submit</button>
                         <button type="button" class="btn btn-primary">Clear</button>

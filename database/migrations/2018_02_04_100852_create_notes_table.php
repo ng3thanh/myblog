@@ -19,9 +19,9 @@ class CreateNotesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->longText('content');
-            $table->integer('notification')->comment('1: Yes, 0: No');
-            $table->dateTime('date_notification');
-            $table->integer('status')->comment('1: Show, 0: Disable');
+            $table->integer('notification')->default(0)->comment('1: Yes, 0: No');
+            $table->dateTime('notification_date')->nullable();
+            $table->integer('status')->default(1)->comment('1: Enable, 0: Disable');
             $table->timestamps();
             $table->softDeletes();
         });

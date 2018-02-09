@@ -1,19 +1,7 @@
 <?php
-namespace App\Repositories\Coins;
+namespace App\Repositories\Personal\Culture\Notes;
 
-interface CoinsRepositoryInterface
+interface NotesRepositoryInterface
 {
-    /**
-     * Get all coins only actived
-     * 
-     * @return mixed
-     */
-    public function getAllCoinActived();
 
-    /**
-     * Get coin only actived
-     * 
-     * @return mixed
-     */
-    public function findOnlyActived($id);
 }

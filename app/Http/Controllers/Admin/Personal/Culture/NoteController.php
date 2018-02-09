@@ -3,12 +3,19 @@
 namespace App\Http\Controllers\Admin\Personal\Culture;
 
 use App\Models\Personal\Culture\Notes;
+use App\Repositories\Personal\Culture\Notes\NotesEloquentRepository;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
 
 class NoteController extends Controller
 {
+    public function __construct(NotesEloquentRepository $notesRepository)
+    {
+        $this->notesRepository = $notesRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +23,8 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.personal.culture.notes.index');
+        $notes = $this->notesRepository->paginate(10);
+        return view('admin.pages.personal.culture.notes.index', ['notes' => $notes]);
     }
 
     /**
@@ -40,7 +48,16 @@ class NoteController extends Controller
     {
         $user = Sentinel::getUser();
 
-        $id = 1;
+        $data = $request->all();
+        $data['user_id'] = 1;
+        unset($data['_token']);
+        $note = $this->notesRepository->create($data);
+        if ($note) {
+            return view('admin.pages.personal.culture.notes.index');
+        } else {
+            return Redirect::back();
+        }
+
     }
 
     /**
@@ -62,7 +79,9 @@ class NoteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $note = $this->notesRepository->find($id);
+        $status = [Notes::ENABLE => 'Enable', Notes::DISABLE => 'Disable'];
+        return view('admin.pages.personal.culture.notes.edit',['note' => $note, 'status'=>$status]);
     }
 
     /**
@@ -74,7 +93,7 @@ class NoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
     }
 
     /**
