@@ -18,4 +18,26 @@ class NotesEloquentRepository extends EloquentRepository implements NotesReposit
     {
         return Notes::class;
     }
+
+    /**
+     * @param $userId
+     * @param string $orderBy
+     * @param string $sort
+     * @return mixed
+     */
+    public function getLastNoteOfUserOrderBy($userId, $orderBy = 'created_at', $sort = 'asc')
+    {
+        return $this->_model->where('user_id', $userId)->orderBy($orderBy, $sort)->firstOrFail();
+    }
+
+    /**
+     * @param $userId
+     * @param $paging
+     * @param string $sort
+     * @param string $orderBy
+     * @return mixed
+     */
+    public function getNoteWithPaginate($userId, $paging, $sort = 'asc', $orderBy = 'created_at'){
+        return $this->_model->where('user_id', $userId)->orderBy($orderBy, $sort)->paginate($paging);
+    }
 }

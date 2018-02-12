@@ -3,8 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\URL;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 class SecretArea
@@ -18,7 +16,7 @@ class SecretArea
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Sentinel::getUser())
+        if (empty(Sentinel::getUser()))
         {
             return redirect()->route('auth.login.form');
         }

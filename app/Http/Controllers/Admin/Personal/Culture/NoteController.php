@@ -10,6 +10,9 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
+/**
+ * @property  userId
+ */
 class NoteController extends Controller
 {
     public function __construct(NotesEloquentRepository $notesRepository)
@@ -24,8 +27,13 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = $this->notesRepository->paginate(10, 'desc');
-        $lastNote = $this->notesRepository->getLastItemOrderBy('created_at', 'desc');
+        if (Sentinel::check()) {
+            $userId = Sentinel::getUser()->id;
+        } else {
+            $userId = 1;
+        }
+        $notes = $this->notesRepository->getNoteWithPaginate($userId, 10, 'desc');
+        $lastNote = $this->notesRepository->getLastNoteOfUserOrderBy($userId, 'created_at', 'desc');
         return view('admin.pages.personal.culture.notes.index', ['notes' => $notes, 'lastNote' => $lastNote]);
     }
 
@@ -48,10 +56,13 @@ class NoteController extends Controller
      */
     public function store(CreateNoteRequest $request)
     {
-        $user = Sentinel::getUser();
-
+        if (Sentinel::check()) {
+            $userId = Sentinel::getUser()->id;
+        } else {
+            $userId = 1;
+        }
         $data = $request->all();
-        $data['user_id'] = 1;
+        $data['user_id'] = $userId;
         unset($data['_token']);
         $note = $this->notesRepository->create($data);
         if ($note) {
