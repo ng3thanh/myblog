@@ -84,7 +84,7 @@
                                 <small><span class="label label-warning">Disable</span></small>
                             @endif
                         </strong>
-                        <small> {{ $lastNote->notification_date }}</small>
+                        <small> {{ date('d/m/Y', strtotime($lastNote->notification_date)) }}</small>
                         <hr>
                         <strong>
                             <i class="fa fa-pencil margin-r-5"></i> Status |
