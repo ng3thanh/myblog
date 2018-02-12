@@ -9,6 +9,7 @@ use App\Repositories\Personal\Culture\Notes\NotesEloquentRepository;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
+use Exception;
 
 /**
  * @property  userId
@@ -18,6 +19,7 @@ class NoteController extends Controller
     public function __construct(NotesEloquentRepository $notesRepository)
     {
         $this->notesRepository = $notesRepository;
+        $this->status = [Notes::ENABLE => 'Enable', Notes::DISABLE => 'Disable'];
     }
 
     /**
@@ -27,14 +29,14 @@ class NoteController extends Controller
      */
     public function index()
     {
-        if (Sentinel::check()) {
+        try {
             $userId = Sentinel::getUser()->id;
-        } else {
-            $userId = 1;
+            $notes = $this->notesRepository->getNoteWithPaginate($userId, 10, 'desc');
+            $lastNote = $this->notesRepository->getLastNoteOfUserOrderBy($userId, 'created_at', 'desc');
+            return view('admin.pages.personal.culture.notes.index', ['notes' => $notes, 'lastNote' => $lastNote]);
+        } catch (Exception $e) {
+            return Redirect::route('main');
         }
-        $notes = $this->notesRepository->getNoteWithPaginate($userId, 10, 'desc');
-        $lastNote = $this->notesRepository->getLastNoteOfUserOrderBy($userId, 'created_at', 'desc');
-        return view('admin.pages.personal.culture.notes.index', ['notes' => $notes, 'lastNote' => $lastNote]);
     }
 
     /**
@@ -44,8 +46,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $status = [Notes::ENABLE => 'Enable', Notes::DISABLE => 'Disable'];
-        return view('admin.pages.personal.culture.notes.create',['status'=>$status]);
+        return view('admin.pages.personal.culture.notes.create', ['status' => $this->status]);
     }
 
     /**
@@ -56,18 +57,18 @@ class NoteController extends Controller
      */
     public function store(CreateNoteRequest $request)
     {
-        if (Sentinel::check()) {
+        try {
             $userId = Sentinel::getUser()->id;
-        } else {
-            $userId = 1;
-        }
-        $data = $request->all();
-        $data['user_id'] = $userId;
-        unset($data['_token']);
-        $note = $this->notesRepository->create($data);
-        if ($note) {
-            return Redirect::route('note.index');
-        } else {
+            $data = $request->all();
+            $data['user_id'] = $userId;
+            unset($data['_token']);
+            $note = $this->notesRepository->create($data);
+            if ($note) {
+                return Redirect::route('note.index');
+            } else {
+                return Redirect::back();
+            }
+        } catch (Exception $e) {
             return Redirect::back();
         }
     }
@@ -93,8 +94,7 @@ class NoteController extends Controller
     public function edit($id)
     {
         $note = $this->notesRepository->find($id);
-        $status = [Notes::ENABLE => 'Enable', Notes::DISABLE => 'Disable'];
-        return view('admin.pages.personal.culture.notes.edit',['note' => $note, 'status'=>$status]);
+        return view('admin.pages.personal.culture.notes.edit',['note' => $note, 'status' => $this->status]);
     }
 
     /**
@@ -106,13 +106,13 @@ class NoteController extends Controller
      */
     public function update(EditNoteRequest $request, $id)
     {
-        $data = $request->all();
-        unset($data['_token']);
-        unset($data['_method']);
-        $note = $this->notesRepository->update($id, $data);
-        if ($note) {
+        try {
+            $data = $request->all();
+            unset($data['_token']);
+            unset($data['_method']);
+            $this->notesRepository->update($id, $data);
             return Redirect::route('note.index');
-        } else {
+        } catch (Exception $e) {
             return Redirect::back();
         }
     }

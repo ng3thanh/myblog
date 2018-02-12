@@ -64,37 +64,41 @@
                 <div class="box-header with-border">
                     <i class="fa fa-pencil margin-r-5"></i>
                     <h3 class="box-title last-title-box-index">Last Note |
+                        @if($lastNote)
                         <small class="crop-title-75"><a href="{{ URL::route('note.show', $lastNote->id) }}">{{ $lastNote->title }}</a></small>
+                        @endif
                     </h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <strong><i class="fa fa-book margin-r-5"></i> Description</strong>
-                    <p class="text-muted"> {{ $lastNote->description }}</p>
-                    <hr>
+                    @if($lastNote)
+                        <strong><i class="fa fa-book margin-r-5"></i> Description</strong>
+                        <p class="text-muted"> {{ $lastNote->description }}</p>
+                        <hr>
 
-                    <strong>
-                        <i class="fa fa-map-marker margin-r-5"></i> Notification |
-                        @if($lastNote->notification == 1)
-                            <small><span class="label label-success">Enable</span> | </small>
-                        @else
-                            <small><span class="label label-warning">Disable</span></small>
-                        @endif
-                    </strong>
-                    <small> {{ $lastNote->notification_date }}</small>
-                    <hr>
-                    <strong>
-                        <i class="fa fa-pencil margin-r-5"></i> Status |
-                        @if($lastNote->status == 1)
-                            <small><span class="label label-success">Enable</span></small>
-                        @else
-                            <small><span class="label label-warning">Disable</span></small>
-                        @endif
-                    </strong>
+                        <strong>
+                            <i class="fa fa-map-marker margin-r-5"></i> Notification |
+                            @if($lastNote->notification == 1)
+                                <small><span class="label label-success">Enable</span> | </small>
+                            @else
+                                <small><span class="label label-warning">Disable</span></small>
+                            @endif
+                        </strong>
+                        <small> {{ $lastNote->notification_date }}</small>
+                        <hr>
+                        <strong>
+                            <i class="fa fa-pencil margin-r-5"></i> Status |
+                            @if($lastNote->status == 1)
+                                <small><span class="label label-success">Enable</span></small>
+                            @else
+                                <small><span class="label label-warning">Disable</span></small>
+                            @endif
+                        </strong>
 
-                    <hr>
-                    <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-                    <p>{!! $lastNote->content !!}</p>
+                        <hr>
+                        <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                        <p>{!! $lastNote->content !!}</p>
+                    @endif
                 </div>
                 <!-- /.box-body -->
             </div>

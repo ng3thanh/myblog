@@ -27,7 +27,7 @@ class NotesEloquentRepository extends EloquentRepository implements NotesReposit
      */
     public function getLastNoteOfUserOrderBy($userId, $orderBy = 'created_at', $sort = 'asc')
     {
-        return $this->_model->where('user_id', $userId)->orderBy($orderBy, $sort)->firstOrFail();
+        return $this->_model->where('user_id', $userId)->orderBy($orderBy, $sort)->first();
     }
 
     /**

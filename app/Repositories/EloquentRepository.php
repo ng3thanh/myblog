@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
