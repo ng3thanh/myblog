@@ -66,7 +66,7 @@ class NoteController extends Controller
             if ($note['status']) {
                 return Redirect::route('note.index')->with('success', 'Create new note successfully!');
             } else {
-                return Redirect::back()->withInput()->with('errors', $note['content']);
+                return Redirect::back()->withInput()->with('danger', $note['content']);
             }
         } catch (Exception $e) {
             return Redirect::back()->withInput()->with('errors', $e->getMessage());
@@ -114,7 +114,7 @@ class NoteController extends Controller
             if ($note['status']) {
                 return Redirect::route('note.index')->with('success', 'Update note successfully!');
             } else {
-                return Redirect::back()->withInput()->with('errors', $note['content']);
+                return Redirect::back()->withInput()->with('danger', $note['content']);
             }
         } catch (Exception $e) {
             return Redirect::back()->withInput()->with('errors', $e->getMessage());
