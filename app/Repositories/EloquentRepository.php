@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Support\Facades\Redirect;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
@@ -78,12 +79,18 @@ abstract class EloquentRepository implements RepositoryInterface
             $new->save();
             
             DB::commit();
-            
-            return $new;
+
+            $result['status'] = true;
+            $result['content'] = $new;
+
         } catch (Exception $e) {
             DB::rollBack();
-            return false;
+            logger('【 ' . __METHOD__ . ' 】 - ' . $e->getMessage());
+
+            $result['status'] = false;
+            $result['content'] = $e->getMessage();
         }
+        return $result;
     }
 
     /**
@@ -96,25 +103,32 @@ abstract class EloquentRepository implements RepositoryInterface
     public function update($id, array $attributes)
     {
 
-        $result = $this->find($id);
-        if ($result) {
+        $update = $this->find($id);
+        if ($update) {
             try {
                 DB::beginTransaction();
-                
-                $result->update($attributes);
+
+                $update->update($attributes);
                 
                 DB::commit();
-                
-                return $result;
-                
+
+                $result['status'] = true;
+                $result['content'] = $update;
+
             } catch (Exception $e) {
                 DB::rollBack();
-                
-                return false;
+                logger('【 ' . __METHOD__ . ' 】 - ' . $e->getMessage());
+
+                $result['status'] = false;
+                $result['content'] = $e->getMessage();
             }
+
+        } else {
+            $result['status'] = false;
+            $result['content'] = 'Not found data to update';
         }
-        
-        return false;
+
+        return $result;
         
     }
 

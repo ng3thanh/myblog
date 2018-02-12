@@ -63,13 +63,13 @@ class NoteController extends Controller
             $data['user_id'] = $userId;
             unset($data['_token']);
             $note = $this->notesRepository->create($data);
-            if ($note) {
-                return Redirect::route('note.index');
+            if ($note['status']) {
+                return Redirect::route('note.index')->with('success', 'Create new note successfully!');
             } else {
-                return Redirect::back();
+                return Redirect::back()->withInput()->with('errors', $note['content']);
             }
         } catch (Exception $e) {
-            return Redirect::back();
+            return Redirect::back()->withInput()->with('errors', $e->getMessage());
         }
     }
 
@@ -110,10 +110,14 @@ class NoteController extends Controller
             $data = $request->all();
             unset($data['_token']);
             unset($data['_method']);
-            $this->notesRepository->update($id, $data);
-            return Redirect::route('note.index');
+            $note = $this->notesRepository->update($id, $data);
+            if ($note['status']) {
+                return Redirect::route('note.index')->with('success', 'Update note successfully!');
+            } else {
+                return Redirect::back()->withInput()->with('errors', $note['content']);
+            }
         } catch (Exception $e) {
-            return Redirect::back();
+            return Redirect::back()->withInput()->with('errors', $e->getMessage());
         }
     }
 
