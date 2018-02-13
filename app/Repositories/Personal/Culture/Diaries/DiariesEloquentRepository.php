@@ -30,16 +30,26 @@ class DiariesEloquentRepository extends EloquentRepository implements DiariesRep
     public function getLastDiaryOfUserOrderBy($userId, $orderBy = 'created_at', $sort = 'asc')
     {
         return $this->_model
-            ->leftJoin('setting_icons', function ($join) {
-                $join->on('setting_icons.id', '=', 'personal_culture_diaries.emotion')
-                     ->where('setting_icons.type', Icons::EMOTION_TYPE);
+            ->leftJoin('setting_icons as icon_emotion', function ($join) {
+                $join->on('icon_emotion.id', '=', 'personal_culture_diaries.emotion')
+                     ->where('icon_emotion.type', Icons::EMOTION_TYPE);
             })
-            ->leftJoin('setting_icons', function ($join) {
-                $join->on('setting_icons.id', '=', 'personal_culture_diaries.weather')
-                     ->where('setting_icons.type', Icons::WEATHER_TYPE);
+            ->leftJoin('setting_icons as icon_weather', function ($join) {
+                $join->on('icon_weather.id', '=', 'personal_culture_diaries.weather')
+                     ->where('icon_weather.type', Icons::WEATHER_TYPE);
             })
-            ->where('diaries.user_id', $userId)
-            ->orderBy($orderBy, $sort)
+            ->where('personal_culture_diaries.user_id', $userId)
+            ->orderBy('personal_culture_diaries.'.$orderBy, $sort)
+            ->select(
+                'personal_culture_diaries.title'
+                , 'personal_culture_diaries.description'
+                , 'personal_culture_diaries.content'
+                , 'personal_culture_diaries.status'
+                , 'icon_emotion.icon as emotion_icon'
+                , 'icon_emotion.name as emotion_name'
+                , 'icon_weather.icon as weather_icon'
+                , 'icon_weather.name as weather_name'
+            )
             ->first();
     }
 
@@ -53,5 +63,33 @@ class DiariesEloquentRepository extends EloquentRepository implements DiariesRep
     public function getDiaryWithPaginate($userId, $paging, $sort = 'asc', $orderBy = 'created_at')
     {
         return $this->_model->where('user_id', $userId)->orderBy($orderBy, $sort)->paginate($paging);
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getDiaryDetail($id) {
+        return $this->_model
+            ->leftJoin('setting_icons as icon_emotion', function ($join) {
+                $join->on('icon_emotion.id', '=', 'personal_culture_diaries.emotion')
+                    ->where('icon_emotion.type', Icons::EMOTION_TYPE);
+            })
+            ->leftJoin('setting_icons as icon_weather', function ($join) {
+                $join->on('icon_weather.id', '=', 'personal_culture_diaries.weather')
+                    ->where('icon_weather.type', Icons::WEATHER_TYPE);
+            })
+            ->where('personal_culture_diaries.id', $id)
+            ->select(
+                'personal_culture_diaries.title'
+                , 'personal_culture_diaries.description'
+                , 'personal_culture_diaries.content'
+                , 'personal_culture_diaries.status'
+                , 'icon_emotion.icon as emotion_icon'
+                , 'icon_emotion.name as emotion_name'
+                , 'icon_weather.icon as weather_icon'
+                , 'icon_weather.name as weather_name'
+            )
+            ->firstOrFail();
     }
 }

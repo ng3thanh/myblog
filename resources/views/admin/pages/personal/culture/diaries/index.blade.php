@@ -76,8 +76,8 @@
                         @else
                             <small><span class="label label-warning">Disable</span></small>
                         @endif
-                        <i class="{{ $lastDiary->emotion }}"></i>
-                        <i class="{{ $lastDiary->weather }}"></i>
+                        <i class="{{ $lastDiary->emotion_icon }}">{{ $lastDiary->emotion_name }}</i> -
+                        <i class="{{ $lastDiary->weather_icon }}">{{ $lastDiary->weather_name }}</i>
                     @endif
                     </div>
                 </div>

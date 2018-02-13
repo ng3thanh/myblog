@@ -31,7 +31,7 @@ class Diary extends Model
         'title',
         'description',
         'content',
-        'emotions',
+        'emotion',
         'weather',
         'status'
     ];

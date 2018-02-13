@@ -19,4 +19,10 @@ interface DiariesRepositoryInterface
      * @return mixed
      */
     public function getDiaryWithPaginate($userId, $paging, $sort = 'asc', $orderBy = 'created_at');
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getDiaryDetail($id);
 }
