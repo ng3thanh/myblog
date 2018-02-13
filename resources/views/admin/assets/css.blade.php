@@ -30,3 +30,6 @@
 
 <!-- Google Font -->
 <link rel="stylesheet" href="{{ asset('css/font-google.css') }}">
+
+<!-- Common Css -->
+<link rel="stylesheet" href="{{ asset('css/common.css') }}">

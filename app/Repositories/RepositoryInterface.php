@@ -37,4 +37,19 @@ interface RepositoryInterface
      * @return mixed
      */
     public function delete($id);
+
+    /**
+     * Paginate data
+     * @param $paging
+     * @return mixed
+     */
+    public function paginate($paging, $sort = 'asc', $orderBy = 'created_at');
+
+    /**
+     * Get last item base on order by
+     * @param $orderBy
+     * @param string $sort
+     * @return mixed
+     */
+    public function getLastItemOrderBy($orderBy = 'created_at', $sort = 'asc');
 }

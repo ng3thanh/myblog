@@ -164,17 +164,10 @@
 									<i class="fa fa-sticky-note"></i> Personal Notes
 								</a>
 							</li>
-							<li class="treeview">
-								<a href="#">
+							<li>
+								<a href="{{ URL::route('diary.index') }}">
 									<i class="fa fa-eraser"></i> Personal Diary
-									<span class="pull-right-container">
-                      					<i class="fa fa-angle-left pull-right"></i>
-                    				</span>
 								</a>
-								<ul class="treeview-menu">
-									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-									<li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-								</ul>
 							</li>
 						</ul>
 					</li>

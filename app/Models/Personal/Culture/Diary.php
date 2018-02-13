@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Notes extends Model
+class Diary extends Model
 {
     const ENABLE = 1;
     const DISABLE = 0;
@@ -19,7 +19,7 @@ class Notes extends Model
      *
      * @var string
      */
-    protected $table = 'personal_culture_notes';
+    protected $table = 'personal_culture_diaries';
 
     /**
      * The attributes that are mass assignable.
@@ -31,8 +31,8 @@ class Notes extends Model
         'title',
         'description',
         'content',
-        'notification',
-        'notification_date',
+        'emotion',
+        'weather',
         'status'
     ];
 }

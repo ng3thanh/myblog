@@ -2,13 +2,26 @@
 
 namespace App\Http\Controllers\Admin\Personal\Culture;
 
+use App\Http\Requests\Personal\Culture\CreateNoteRequest;
+use App\Http\Requests\Personal\Culture\EditNoteRequest;
 use App\Models\Personal\Culture\Notes;
+use App\Repositories\Personal\Culture\Notes\NotesEloquentRepository;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Redirect;
+use Exception;
 
+/**
+ * @property  userId
+ */
 class NoteController extends Controller
 {
+    public function __construct(NotesEloquentRepository $notesRepository)
+    {
+        $this->notesRepository = $notesRepository;
+        $this->status = config('common.status');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +29,14 @@ class NoteController extends Controller
      */
     public function index()
     {
-        return view('admin.pages.personal.culture.notes.index');
+        try {
+            $userId = Sentinel::getUser()->id;
+            $notes = $this->notesRepository->getNoteWithPaginate($userId, 10, 'desc');
+            $lastNote = $this->notesRepository->getLastNoteOfUserOrderBy($userId, 'created_at', 'desc');
+            return view('admin.pages.personal.culture.notes.index', ['notes' => $notes, 'lastNote' => $lastNote]);
+        } catch (Exception $e) {
+            return Redirect::route('main')->with('errors', $e->getMessage());
+        }
     }
 
     /**
@@ -26,8 +46,7 @@ class NoteController extends Controller
      */
     public function create()
     {
-        $status = [Notes::ENABLE => 'Enable', Notes::DISABLE => 'Disable'];
-        return view('admin.pages.personal.culture.notes.create',['status'=>$status]);
+        return view('admin.pages.personal.culture.notes.create', ['status' => $this->status]);
     }
 
     /**
@@ -36,11 +55,22 @@ class NoteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateNoteRequest $request)
     {
-        $user = Sentinel::getUser();
-
-        $id = 1;
+        try {
+            $userId = Sentinel::getUser()->id;
+            $data = $request->all();
+            $data['user_id'] = $userId;
+            unset($data['_token']);
+            $note = $this->notesRepository->create($data);
+            if ($note['status']) {
+                return Redirect::route('note.index')->with('success', 'Create new note successfully!');
+            } else {
+                return Redirect::back()->withInput()->with('danger', $note['content']);
+            }
+        } catch (Exception $e) {
+            return Redirect::back()->withInput()->with('errors', $e->getMessage());
+        }
     }
 
     /**
@@ -51,7 +81,8 @@ class NoteController extends Controller
      */
     public function show($id)
     {
-        //
+        $note = $this->notesRepository->find($id);
+        return view('admin.pages.personal.culture.notes.show',['note' => $note]);
     }
 
     /**
@@ -62,7 +93,8 @@ class NoteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $note = $this->notesRepository->find($id);
+        return view('admin.pages.personal.culture.notes.edit',['note' => $note, 'status' => $this->status]);
     }
 
     /**
@@ -72,9 +104,21 @@ class NoteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditNoteRequest $request, $id)
     {
-        //
+        try {
+            $data = $request->all();
+            unset($data['_token']);
+            unset($data['_method']);
+            $note = $this->notesRepository->update($id, $data);
+            if ($note['status']) {
+                return Redirect::route('note.index')->with('success', 'Update note successfully!');
+            } else {
+                return Redirect::back()->withInput()->with('danger', $note['content']);
+            }
+        } catch (Exception $e) {
+            return Redirect::back()->withInput()->with('errors', $e->getMessage());
+        }
     }
 
     /**

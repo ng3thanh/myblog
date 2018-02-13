@@ -17,13 +17,13 @@ class SentinelDatabaseSeeder extends Seeder
         $admin = Sentinel::getUserRepository()->create(array(
             'username' => 'admin',
             'email'    => 'admin@admin.com',
-            'password' => '123456'
+            'password' => '12345678'
         ));
 
         $user = Sentinel::getUserRepository()->create(array(
             'username' => 'user',
             'email'    => 'user@user.com',
-            'password' => '123456'
+            'password' => '12345678'
         ));
 
         // Create Activations

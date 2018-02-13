@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Models\Personal\Culture;
+namespace App\Models\Setting;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
-class Notes extends Model
+class Icons extends Model
 {
-    const ENABLE = 1;
-    const DISABLE = 0;
+    const EMOTION_TYPE = 0;
+    const WEATHER_TYPE = 1;
 
-    use Notifiable;
     use SoftDeletes;
-
+    use Notifiable;
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'personal_culture_notes';
+    protected $table = 'setting_icons';
 
     /**
      * The attributes that are mass assignable.
@@ -27,12 +26,8 @@ class Notes extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'title',
-        'description',
-        'content',
-        'notification',
-        'notification_date',
-        'status'
+        'icon',
+        'name',
+        'type'
     ];
 }
