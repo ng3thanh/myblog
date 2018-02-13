@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers\Admin\Personal\Culture;
 
+use App\Models\Personal\Culture\Diary;
+use App\Repositories\Personal\Culture\Diaries\DiariesEloquentRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 
 class DiaryController extends Controller
 {
+
+    public function __construct(DiariesEloquentRepository $diariesRepository)
+    {
+        $this->diariesRepository = $diariesRepository;
+        $this->status = [Diary::ENABLE => 'Enable', Diary::DISABLE => 'Disable'];
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,14 @@ class DiaryController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $userId = Sentinel::getUser()->id;
+            $diaries = $this->diariesRepository->getDiaryWithPaginate($userId, 10, 'desc');
+            $lastDiary = $this->diariesRepository->getLastDiaryOfUserOrderBy($userId, 'created_at', 'desc');
+            return view('admin.pages.personal.culture.diaries.index', ['diaries' => $diaries, 'lastDiary' => $lastDiary]);
+        } catch (Exception $e) {
+            return Redirect::route('main')->with('errors', $e->getMessage());
+        }
     }
 
     /**
@@ -24,7 +42,7 @@ class DiaryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.personal.culture.notes.create', ['status' => $this->status]);
     }
 
     /**
@@ -35,7 +53,20 @@ class DiaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $userId = Sentinel::getUser()->id;
+            $data = $request->all();
+            $data['user_id'] = $userId;
+            unset($data['_token']);
+            $note = $this->diariesRepository->create($data);
+            if ($note['status']) {
+                return Redirect::route('note.index')->with('success', 'Create new note successfully!');
+            } else {
+                return Redirect::back()->withInput()->with('danger', $note['content']);
+            }
+        } catch (Exception $e) {
+            return Redirect::back()->withInput()->with('errors', $e->getMessage());
+        }
     }
 
     /**

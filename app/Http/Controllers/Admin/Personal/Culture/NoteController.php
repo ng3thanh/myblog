@@ -35,7 +35,7 @@ class NoteController extends Controller
             $lastNote = $this->notesRepository->getLastNoteOfUserOrderBy($userId, 'created_at', 'desc');
             return view('admin.pages.personal.culture.notes.index', ['notes' => $notes, 'lastNote' => $lastNote]);
         } catch (Exception $e) {
-            return Redirect::route('main');
+            return Redirect::route('main')->with('errors', $e->getMessage());
         }
     }
 

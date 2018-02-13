@@ -3,6 +3,7 @@
 namespace App\Models\Personal\Culture;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class Diary extends Model
 {
@@ -16,7 +17,7 @@ class Diary extends Model
      *
      * @var string
      */
-    protected $table = 'personal_culture_notes';
+    protected $table = 'personal_culture_diaries';
 
     /**
      * The attributes that are mass assignable.
