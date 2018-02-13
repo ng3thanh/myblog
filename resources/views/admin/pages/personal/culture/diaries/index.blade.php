@@ -68,33 +68,24 @@
                         <small class="crop-title-75"><a href="{{ URL::route('diary.show', $lastDiary->id) }}">{{ $lastDiary->title }}</a></small>
                         @endif
                     </h3>
+
+                    @if($lastDiary)
+                    <div class="col-md-12">
+                        @if($lastDiary->status == 1)
+                            <small><span class="label label-success">Enable</span></small>
+                        @else
+                            <small><span class="label label-warning">Disable</span></small>
+                        @endif
+                        <i class="{{ $lastDiary->emotion }}"></i>
+                        <i class="{{ $lastDiary->weather }}"></i>
+                    @endif
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
                     @if($lastDiary)
                         <strong><i class="fa fa-book margin-r-5"></i> Description</strong>
                         <p class="text-muted"> {{ $lastDiary->description }}</p>
-                        <hr>
-
-                        <strong>
-                            <i class="fa fa-map-marker margin-r-5"></i> Notification |
-                            @if($lastDiary->notification == 1)
-                                <small><span class="label label-success">Enable</span> | </small>
-                            @else
-                                <small><span class="label label-warning">Disable</span></small>
-                            @endif
-                        </strong>
-                        <small> {{ date('d/m/Y', strtotime($lastDiary->notification_date)) }}</small>
-                        <hr>
-                        <strong>
-                            <i class="fa fa-pencil margin-r-5"></i> Status |
-                            @if($lastDiary->status == 1)
-                                <small><span class="label label-success">Enable</span></small>
-                            @else
-                                <small><span class="label label-warning">Disable</span></small>
-                            @endif
-                        </strong>
-
                         <hr>
                         <strong><i class="fa fa-file-text-o margin-r-5"></i> Diary content</strong>
                         <p>{!! $lastDiary->content !!}</p>

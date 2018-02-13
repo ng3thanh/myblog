@@ -34,6 +34,7 @@ class DiaryController extends Controller
             $userId = Sentinel::getUser()->id;
             $diaries = $this->diariesRepository->getDiaryWithPaginate($userId, 10, 'desc');
             $lastDiary = $this->diariesRepository->getLastDiaryOfUserOrderBy($userId, 'created_at', 'desc');
+            dd($lastDiary);
             return view('admin.pages.personal.culture.diaries.index', ['diaries' => $diaries, 'lastDiary' => $lastDiary]);
         } catch (Exception $e) {
             return Redirect::route('main')->with('errors', $e->getMessage());
