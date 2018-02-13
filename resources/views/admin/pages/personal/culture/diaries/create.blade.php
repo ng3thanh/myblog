@@ -30,11 +30,11 @@
                                             <label class="label-box-create"><i class="fa fa-newspaper-o"></i> Emotion</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                    <i id="emotion-icon" class="fa"></i>
+                                                    <i id="emotion-icon" class=""></i>
                                                 </span>
                                                 <select name="emotion" id="emotion" class="form-control" value="{{ old('emotion') }}">
                                                     @foreach($emotions as $key => $value)
-                                                        <option value="{{ $key }}">{{ $value }}</option>
+                                                        <option value="{{ $value->id }}" data-value="{{ $value->icon }}">{{ $value->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -44,11 +44,11 @@
                                             <label class="label-box-create"><i class="fa fa-newspaper-o"></i> Weather</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
-                                                    <i id="weather-icon" class="fa"></i>
+                                                    <i id="weather-icon" class=""></i>
                                                 </span>
                                                 <select name="weather" id="weather" class="form-control" value="{{ old('weather') }}">
                                                     @foreach($weathers as $key => $value)
-                                                        <option value="{{ $key }}">{{ $value }}</option>
+                                                        <option value="{{ $value->id }}" data-value="{{ $value->icon }}">{{ $value->name }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -125,6 +125,17 @@
         $(function () {
             CKEDITOR.replace('diary_editer')
             $('.textarea').wysihtml5()
+            $('#emotion-icon').removeClass().addClass($('#emotion').find(':selected').data('value'));
+            $('#weather-icon').removeClass().addClass($('#weather').find(':selected').data('value'));
+        })
+
+        $('#emotion').change(function () {
+            var icon = $(this).find(':selected').data('value')
+            $('#emotion-icon').removeClass().addClass(icon);
+        })
+        $('#weather').change(function () {
+            var icon = $(this).find(':selected').data('value')
+            $('#weather-icon').removeClass().addClass(icon);
         })
     </script>
 @endsection

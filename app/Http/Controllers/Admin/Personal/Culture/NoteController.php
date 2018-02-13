@@ -19,7 +19,7 @@ class NoteController extends Controller
     public function __construct(NotesEloquentRepository $notesRepository)
     {
         $this->notesRepository = $notesRepository;
-        $this->status = [Notes::ENABLE => 'Enable', Notes::DISABLE => 'Disable'];
+        $this->status = config('common.status');
     }
 
     /**

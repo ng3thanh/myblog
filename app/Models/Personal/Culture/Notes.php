@@ -3,6 +3,7 @@
 namespace App\Models\Personal\Culture;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 
 class Notes extends Model
@@ -11,6 +12,7 @@ class Notes extends Model
     const DISABLE = 0;
 
     use Notifiable;
+    use SoftDeletes;
 
     /**
      * The table associated with the model.
