@@ -68,15 +68,11 @@ Route::middleware('secret')->domain('admin.' . env('APP_DOMAIN'))->namespace('Ad
     });
 
     Route::prefix('mailbox')->group(function () {
-        Route::resource('mailbox', 'ailboxController');
+        Route::resource('mailbox', 'MailboxController');
     });
 });
 
-Route::middleware('guest')->domain(env('APP_DOMAIN'))->group(function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
-    
+Route::middleware('guest')->domain('admin.' . env('APP_DOMAIN'))->group(function () {
     // Authorization
     Route::get('/login', [
         'as' => 'auth.login.form',
@@ -90,7 +86,13 @@ Route::middleware('guest')->domain(env('APP_DOMAIN'))->group(function () {
         'as' => 'auth.logout',
         'uses' => 'Auth\SessionController@getLogout'
     ]);
-    
+});
+
+Route::middleware('guest')->domain(env('APP_DOMAIN'))->group(function () {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
     // Registration
     Route::get('register', [
         'as' => 'auth.register.form',

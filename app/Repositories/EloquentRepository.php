@@ -2,6 +2,8 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
+use Exception;
+use Illuminate\Support\Facades\Redirect;
 
 abstract class EloquentRepository implements RepositoryInterface
 {
@@ -48,13 +50,12 @@ abstract class EloquentRepository implements RepositoryInterface
     /**
      * Get one
      *
-     * @param
-     *            $id
+     * @param $id
      * @return mixed
      */
     public function find($id)
     {
-        $result = $this->_model->find($id);
+        $result = $this->_model->findOrFail($id);
         return $result;
     }
 
@@ -78,52 +79,63 @@ abstract class EloquentRepository implements RepositoryInterface
             $new->save();
             
             DB::commit();
-            
-            return $new;
+
+            $result['status'] = true;
+            $result['content'] = $new;
+
         } catch (Exception $e) {
             DB::rollBack();
-            return false;
+            logger('【 ' . __METHOD__ . ' 】 - ' . $e->getMessage());
+
+            $result['status'] = false;
+            $result['content'] = $e->getMessage();
         }
+        return $result;
     }
 
     /**
      * Update
      *
-     * @param
-     *            $id
+     * @param $id
      * @param array $attributes            
      * @return bool|mixed
      */
     public function update($id, array $attributes)
     {
 
-        $result = $this->find($id);
-        if ($result) {
+        $update = $this->find($id);
+        if ($update) {
             try {
                 DB::beginTransaction();
-                
-                $result->update($attributes);
+
+                $update->update($attributes);
                 
                 DB::commit();
-                
-                return $result;
-                
+
+                $result['status'] = true;
+                $result['content'] = $update;
+
             } catch (Exception $e) {
                 DB::rollBack();
-                
-                return false;
+                logger('【 ' . __METHOD__ . ' 】 - ' . $e->getMessage());
+
+                $result['status'] = false;
+                $result['content'] = $e->getMessage();
             }
+
+        } else {
+            $result['status'] = false;
+            $result['content'] = 'Not found data to update';
         }
-        
-        return false;
+
+        return $result;
         
     }
 
     /**
      * Delete
      *
-     * @param
-     *            $id
+     * @param $id
      * @return bool
      */
     public function delete($id)
@@ -135,5 +147,26 @@ abstract class EloquentRepository implements RepositoryInterface
         }
         
         return false;
+    }
+
+    /**
+     * Paginate data
+     *
+     * @param $paging
+     * @return mixed
+     */
+    public function paginate($paging, $sort = 'asc', $orderBy = 'created_at'){
+        return $this->_model->orderBy($orderBy, $sort)->paginate($paging);
+    }
+
+    /**
+     * Get last item base on order by
+     *
+     * @param $orderBy
+     * @param string $sort
+     * @return mixed
+     */
+    public function getLastItemOrderBy($orderBy = 'created_at', $sort = 'asc') {
+        return $this->_model->orderBy($orderBy, $sort)->firstOrFail();
     }
 }
