@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\Personal\Culture;
 
 use App\Models\Personal\Culture\Diary;
+use App\Models\Setting\Icons;
 use App\Repositories\Personal\Culture\Diaries\DiariesEloquentRepository;
+use App\Repositories\Settings\Icons\IconsEloquentRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
@@ -11,9 +13,10 @@ use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 class DiaryController extends Controller
 {
 
-    public function __construct(DiariesEloquentRepository $diariesRepository)
+    public function __construct(DiariesEloquentRepository $diariesRepository, IconsEloquentRepository $iconRespository)
     {
         $this->diariesRepository = $diariesRepository;
+        $this->iconRespository = $iconRespository;
         $this->status = [Diary::ENABLE => 'Enable', Diary::DISABLE => 'Disable'];
     }
 
@@ -42,7 +45,13 @@ class DiaryController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.personal.culture.notes.create', ['status' => $this->status]);
+        $emotions = $this->iconRespository->getIconsByType(Icons::EMOTION_TYPE);
+        $weathers = $this->iconRespository->getIconsByType(Icons::WEATHER_TYPE);
+        return view('admin.pages.personal.culture.diaries.create', [
+            'status'    => $this->status,
+            'emotions'  => $emotions,
+            'weathers'  => $weathers
+        ]);
     }
 
     /**

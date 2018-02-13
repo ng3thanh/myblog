@@ -22,25 +22,12 @@
                         {{ method_field('PUT') }}
                         <!-- /.box-header -->
                             <div class="col-md-6">
-                                <div class="box box-warning">
-                                    <div class="box-body">
-                                        <div class="form-group @if ($errors->has('content')) has-error @endif">
-                                            <textarea id="note_editer" name="content" rows="8" cols="60">{{ $note->content }}</textarea>
-                                            @if ($errors->has('content'))
-                                                <span class="help-block">{{ $errors->first('content') }}</span>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
                                 <!-- general form elements disabled -->
                                 <div class="box box-warning">
                                     <!-- /.box-header -->
                                     <div class="box-body">
                                         <!-- text input -->
-                                        <div class="form-group @if ($errors->has('title')) has-error @endif">
+                                        <div class="col-md-12 form-group @if ($errors->has('title')) has-error @endif">
                                             <label class="label-box-edit"><i class="fa fa-edit"></i> Title</label>
                                             <input type="text" name="title" class="form-control" value="{{ $note->title }}">
                                             @if ($errors->has('title'))
@@ -48,14 +35,14 @@
                                             @endif
                                         </div>
                                         <!-- textarea -->
-                                        <div class="form-group @if ($errors->has('description')) has-error @endif">
+                                        <div class="col-md-12 form-group @if ($errors->has('description')) has-error @endif">
                                             <label class="label-box-edit"><i class="fa fa-archive"></i> Description</label>
                                             <textarea name="description" class="form-control" rows="3">{{ $note->description }}</textarea>
                                             @if ($errors->has('description'))
                                                 <span class="help-block">{{ $errors->first('description') }}</span>
                                             @endif
                                         </div>
-                                        <div class="form-group">
+                                        <div class="col-md-12 form-group">
                                             <label class="label-box-edit"><i class="fa fa-newspaper-o"></i> Notification</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
@@ -66,7 +53,7 @@
                                         </div>
 
                                         <!-- select -->
-                                        <div class="form-group">
+                                        <div class="col-md-12 form-group">
                                             <label class="label-box-edit"><i class="fa fa-check-circle"> </i> Select status</label>
                                             <select name="status" class="form-control" value="{{ old('status') }}">
                                                 @foreach($status as $key => $value)
@@ -78,6 +65,19 @@
                                     <!-- /.box-body -->
                                 </div>
                                 <!-- /.box -->
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="box box-warning">
+                                    <div class="box-body">
+                                        <div class="col-md-12 form-group @if ($errors->has('content')) has-error @endif">
+                                            <textarea id="note_editer" name="content" rows="8" cols="60">{{ $note->content }}</textarea>
+                                            @if ($errors->has('content'))
+                                                <span class="help-block">{{ $errors->first('content') }}</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>
