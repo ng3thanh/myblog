@@ -7,7 +7,7 @@
 @section('title', 'Notes')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/pages/note.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/pages/culture.css') }}">
 @endsection
 
 @section('content')

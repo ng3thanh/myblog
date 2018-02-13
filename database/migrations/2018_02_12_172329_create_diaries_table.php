@@ -19,7 +19,7 @@ class CreateDiariesTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->longText('content');
-            $table->integer('emotions');
+            $table->integer('emotion');
             $table->integer('weather');
             $table->integer('status')->default(1)->comment('1: Enable, 0: Disable');
             $table->timestamps();

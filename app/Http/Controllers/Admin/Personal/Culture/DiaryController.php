@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Personal\Culture;
 
+use App\Http\Requests\Personal\Culture\CreateDiaryRequest;
+use App\Http\Requests\Personal\Culture\EditDiaryRequest;
 use App\Models\Personal\Culture\Diary;
 use App\Models\Setting\Icons;
 use App\Repositories\Personal\Culture\Diaries\DiariesEloquentRepository;
 use App\Repositories\Settings\Icons\IconsEloquentRepository;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Support\Facades\Redirect;
 
 class DiaryController extends Controller
 {
@@ -17,7 +19,7 @@ class DiaryController extends Controller
     {
         $this->diariesRepository = $diariesRepository;
         $this->iconRespository = $iconRespository;
-        $this->status = [Diary::ENABLE => 'Enable', Diary::DISABLE => 'Disable'];
+        $this->status = config('common.status');
     }
 
 
@@ -60,18 +62,18 @@ class DiaryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDiaryRequest $request)
     {
         try {
             $userId = Sentinel::getUser()->id;
             $data = $request->all();
             $data['user_id'] = $userId;
             unset($data['_token']);
-            $note = $this->diariesRepository->create($data);
-            if ($note['status']) {
-                return Redirect::route('note.index')->with('success', 'Create new note successfully!');
+            $diary = $this->diariesRepository->create($data);
+            if ($diary['status']) {
+                return Redirect::route('diary.index')->with('success', 'Create new diary successfully!');
             } else {
-                return Redirect::back()->withInput()->with('danger', $note['content']);
+                return Redirect::back()->withInput()->with('danger', $diary['content']);
             }
         } catch (Exception $e) {
             return Redirect::back()->withInput()->with('errors', $e->getMessage());
@@ -107,7 +109,7 @@ class DiaryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditDiaryRequest $request, $id)
     {
         //
     }
